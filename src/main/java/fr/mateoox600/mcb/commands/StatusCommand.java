@@ -2,7 +2,6 @@ package fr.mateoox600.mcb.commands;
 
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
-import fr.mateoox600.mcb.Config;
 import fr.mateoox600.mcb.MCB;
 import net.dv8tion.jda.api.entities.Activity;
 

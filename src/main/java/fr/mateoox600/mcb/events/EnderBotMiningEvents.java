@@ -1,6 +1,5 @@
 package fr.mateoox600.mcb.events;
 
-import fr.mateoox600.mcb.Config;
 import fr.mateoox600.mcb.MCB;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;

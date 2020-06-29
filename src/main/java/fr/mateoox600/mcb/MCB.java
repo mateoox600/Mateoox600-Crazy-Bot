@@ -8,6 +8,7 @@ import fr.mateoox600.mcb.enderbot.utils.EnderBotTower;
 import fr.mateoox600.mcb.events.EnderBotMiningEvents;
 import fr.mateoox600.mcb.events.GetRolesEvents;
 import fr.mateoox600.mcb.events.UserEvents;
+import fr.mateoox600.mcb.utils.Config;
 import fr.mateoox600.mcb.utils.Logger;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -27,7 +28,8 @@ public class MCB {
 
     public static void main(String[] args) throws LoginException, InterruptedException, IOException {
 
-        config = new Config("config.json");
+        //config = new Config("config.json");
+        config = new Config();
 
         enderBotTower = new EnderBotTower();
 
