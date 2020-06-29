@@ -13,7 +13,8 @@ public class EnderBotTower {
     HashMap<Integer, Integer> tower = new HashMap<>();
 
     public EnderBotTower() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(new File(getClass().getClassLoader().getResource("EnderBotTower.json").getPath().replace("%20", " "))));
+        //BufferedReader reader = new BufferedReader(new FileReader(new File(getClass().getClassLoader().getResource("EnderBotTower.json").getPath().replace("%20", " "))));
+        BufferedReader reader = new BufferedReader(new FileReader(new File("file:/app/target/MCB-1.0.0.jar/EnderBotTower.json")));
         StringBuilder jsonFile = new StringBuilder();
         String line;
         while ((line = reader.readLine()) != null) {
