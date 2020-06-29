@@ -11,7 +11,7 @@ public class EnderBotMiningEvents extends ListenerAdapter {
 
     @Override
     public void onGuildMessageReceived(@Nonnull GuildMessageReceivedEvent e) {
-        if (e.getAuthor().getId().equals("280726849842053120") && e.getChannel().getId().equals("722010652213772379") && !e.getMessage().getEmbeds().isEmpty()) {
+        if (e.getChannel().getId().equals("722010652213772379") && !e.getMessage().getEmbeds().isEmpty()) {
             MessageEmbed msg_embed = e.getMessage().getEmbeds().get(0);
             try {
                 if (msg_embed.getAuthor().getName().equalsIgnoreCase(e.getJDA().getUserById(MCB.config.getOwnerId()).getName())) {
