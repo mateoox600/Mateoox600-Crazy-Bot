@@ -1,0 +1,25 @@
+package fr.mateoox600.mcb.enderbot.commands;
+
+import com.jagrosh.jdautilities.command.Command;
+import com.jagrosh.jdautilities.command.CommandEvent;
+import fr.mateoox600.mcb.MCB;
+
+import java.util.Arrays;
+
+public class EnderBotTowerCommand extends Command {
+
+    public EnderBotTowerCommand(){
+        this.name = "ebtower";
+        this.help = "Command with enderbot function like tower, etc";
+        this.aliases = new String[]{"ebto", "ebtow"};
+    }
+
+    @Override
+    protected void execute(CommandEvent e) {
+        String[] args = e.getMessage().getContentRaw().split("\\s+");
+        args = Arrays.copyOfRange(args, 1, args.length);
+        if(args.length > 0){
+            e.getChannel().sendMessage("You can go to the level " + MCB.enderBotTower.getBeatableBoss(Integer.parseInt(args[0])) + " of the tower!").queue();
+        }
+    }
+}
