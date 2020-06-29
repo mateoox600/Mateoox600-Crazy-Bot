@@ -14,27 +14,27 @@ public class Config {
     public final String TOKEN = "NzE0MTU1NzY5NTE1MjEyODMx.Xut8Kg.3zEcKAqQX9QHKgaC0c_ogO58wLs";
     public final String OWNER_ID = "251978573139673088";
 
-    public Config(){
+    public Config() {
         status = this.STATUS_PREFIX + this.STATUS_MESSAGE;
     }
 
-    public String getPrefix(){
+    public String getPrefix() {
         return this.PREFIX;
     }
 
-    public String getToken(){
+    public String getToken() {
         return this.TOKEN;
     }
 
-    public String getOwnerId(){
+    public String getOwnerId() {
         return this.OWNER_ID;
     }
 
-    public String getStatus(){
+    public String getStatus() {
         return status;
     }
 
-    public String setStatus(String status){
+    public String setStatus(String status) {
         return this.status = this.STATUS_PREFIX + status;
     }
 

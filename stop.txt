@@ -1,0 +1,3 @@
+heroku ps
+
+heroku ps:stop release:****

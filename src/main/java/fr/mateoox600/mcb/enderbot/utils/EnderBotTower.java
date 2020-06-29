@@ -121,7 +121,7 @@ public class EnderBotTower {
                 "  \"99\": 200000,\n" +
                 "  \"100\": 999999\n" +
                 "}");
-        for(String key : t.keySet()){
+        for (String key : t.keySet()) {
             tower.put(Integer.parseInt(key), t.getInt(key));
         }
 
