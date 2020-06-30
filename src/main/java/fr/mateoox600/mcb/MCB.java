@@ -6,6 +6,7 @@ import fr.mateoox600.mcb.commands.*;
 import fr.mateoox600.mcb.enderbot.commands.EBTowerCommand;
 import fr.mateoox600.mcb.enderbot.utils.EBTower;
 import fr.mateoox600.mcb.enderbot.events.EBMiningEvents;
+import fr.mateoox600.mcb.enderbot.utils.reminders.RemindersManager;
 import fr.mateoox600.mcb.events.GetRolesEvents;
 import fr.mateoox600.mcb.events.UserEvents;
 import fr.mateoox600.mcb.utils.Config;
@@ -25,6 +26,7 @@ public class MCB {
     public static Logger logger;
     public static EBTower EBTower;
     public static Config config;
+    public static RemindersManager remindersManager;
 
     public static void main(String[] args) throws LoginException, InterruptedException, IOException {
 
@@ -32,6 +34,8 @@ public class MCB {
         config = new Config();
 
         EBTower = new EBTower();
+
+        remindersManager = new RemindersManager();
 
         EventWaiter waiter = new EventWaiter();
 
@@ -45,7 +49,9 @@ public class MCB {
                 new ReportCommand(),
                 new CalcCommand(),
                 new EBTowerCommand(),
-                new StatusCommand());
+                new StatusCommand(),
+                new StopCommand(),
+                new DebugCommand());
 
         JDABuilder jdaBuilder = JDABuilder.createDefault(config.getToken())
                 .setChunkingFilter(ChunkingFilter.ALL)
