@@ -3,7 +3,6 @@ package fr.mateoox600.mcb.enderbot.utils.reminders;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -31,40 +30,40 @@ public class Reminder {
         channel.sendMessage(getMessage()).queue();
     }
 
-    private String parseMessageTime(long in){
+    private String parseMessageTime(long in) {
         StringBuilder stringBuilder = new StringBuilder("Set a reminder in ");
         int days = Math.toIntExact(in / 1000 / 60 / 60 / 24);
         if (days > 0) {
             if (days > 1) {
                 stringBuilder.append(days).append(" hours, ");
-            }else{
+            } else {
                 stringBuilder.append(days).append(" hours, ");
             }
         }
-        in -= days*24*60*60*1000;
+        in -= days * 24 * 60 * 60 * 1000;
         int hours = Math.toIntExact(in / 1000 / 60 / 60);
         if (hours > 0) {
             if (hours > 1) {
                 stringBuilder.append(hours).append(" hours, ");
-            }else{
+            } else {
                 stringBuilder.append(hours).append(" hours, ");
             }
         }
-        in -= hours*60*60*1000;
-        int minutes = Math.toIntExact(in/1000/60);
+        in -= hours * 60 * 60 * 1000;
+        int minutes = Math.toIntExact(in / 1000 / 60);
         if (minutes > 0) {
             if (minutes > 1) {
                 stringBuilder.append(minutes).append(" minutes, ");
-            }else{
+            } else {
                 stringBuilder.append(minutes).append(" minute, ");
             }
         }
-        in -= minutes*60*1000;
-        int seconds = Math.toIntExact(in/1000);
+        in -= minutes * 60 * 1000;
+        int seconds = Math.toIntExact(in / 1000);
         if (seconds > 0) {
             if (seconds > 1) {
                 stringBuilder.append(seconds).append(" seconds ");
-            }else{
+            } else {
                 stringBuilder.append(seconds).append(" second ");
             }
         }
@@ -74,11 +73,11 @@ public class Reminder {
 
 }
 
-class Task extends TimerTask{
+class Task extends TimerTask {
 
     private Reminder reminder;
 
-    public Task(Reminder reminder){
+    public Task(Reminder reminder) {
         this.reminder = reminder;
     }
 

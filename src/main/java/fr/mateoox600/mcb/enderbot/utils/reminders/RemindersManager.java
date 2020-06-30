@@ -21,25 +21,21 @@ public class RemindersManager {
     public static long parseReminderTime(String arg){
         long totalTime = 0;
 
-        String loopingOn = "";
-        for (char arg_char : arg.toCharArray()){
-            if (arg_char == 'D' || arg_char == 'd') {
-                totalTime += Integer.parseInt(loopingOn)*24*60*60*1000;
-                loopingOn = "";
-            }
-            else if (arg_char == 'H' || arg_char == 'h') {
-                totalTime += Integer.parseInt(loopingOn)*60*60*1000;
-                loopingOn = "";
-            }
-            else if (arg_char == 'M' || arg_char == 'm') {
-                totalTime += Integer.parseInt(loopingOn)*60*1000;
-                loopingOn = "";
-            }
-            else if (arg_char == 'S' || arg_char == 's') {
-                totalTime += Integer.parseInt(loopingOn)*1000;
-                loopingOn = "";
-            }
-            else loopingOn += arg_char;
+        StringBuilder loopingOn = new StringBuilder();
+        for (char arg_char : arg.toLowerCase().toCharArray()){
+            if (arg_char == 'd') {
+                totalTime += Integer.parseInt(loopingOn.toString())*24*60*60*1000;
+                loopingOn = new StringBuilder();
+            }else if (arg_char == 'h') {
+                totalTime += Integer.parseInt(loopingOn.toString())*60*60*1000;
+                loopingOn = new StringBuilder();
+            }else if (arg_char == 'm') {
+                totalTime += Integer.parseInt(loopingOn.toString())*60*1000;
+                loopingOn = new StringBuilder();
+            }else if (arg_char == 's') {
+                totalTime += Integer.parseInt(loopingOn.toString())*1000;
+                loopingOn = new StringBuilder();
+            }else loopingOn.append(arg_char);
         }
 
         return totalTime;
