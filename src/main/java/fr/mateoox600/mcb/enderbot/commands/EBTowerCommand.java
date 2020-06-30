@@ -21,7 +21,6 @@ public class EBTowerCommand extends Command {
         args = Arrays.copyOfRange(args, 1, args.length);
         if(args.length > 0){
             e.getChannel().sendMessage("You can go to the level " + MCB.EBTower.getBeatableBoss(Integer.parseInt(args[0])) + " of the tower!").queue();
-            e.getJDA().getEmotesByName("someEmote", false).get(0).get
         }
     }
 }
