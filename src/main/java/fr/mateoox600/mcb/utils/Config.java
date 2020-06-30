@@ -11,7 +11,7 @@ public class Config {
     public final String STATUS_PREFIX = "(In Dev) ";
     public final String STATUS_MESSAGE = "Existing... little bit";
     public final String PREFIX = ".";
-    public final String TOKEN = "NzE0MTU1NzY5NTE1MjEyODMx.Xut8Kg.3zEcKAqQX9QHKgaC0c_ogO58wLs";
+    public final String TOKEN = "NzE0MTU1NzY5NTE1MjEyODMx.XvuwAw.uKTpJj9DKK5AfxHbUSEnkxWaEcw";
     public final String OWNER_ID = "251978573139673088";
 
     public Config() {
