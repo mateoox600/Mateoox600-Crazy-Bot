@@ -8,11 +8,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class EnderBotTower {
+public class EBTower {
 
     HashMap<Integer, Integer> tower = new HashMap<>();
 
-    public EnderBotTower() throws IOException {
+    public EBTower() throws IOException {
         /*BufferedReader reader = new BufferedReader(new FileReader(new File(getClass().getClassLoader().getResource("EnderBotTower.json").getPath().replace("%20", " "))));
         StringBuilder jsonFile = new StringBuilder();
         String line;

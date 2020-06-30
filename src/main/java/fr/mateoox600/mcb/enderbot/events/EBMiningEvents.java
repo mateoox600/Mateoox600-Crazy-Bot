@@ -1,4 +1,4 @@
-package fr.mateoox600.mcb.events;
+package fr.mateoox600.mcb.enderbot.events;
 
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import javax.annotation.Nonnull;
 
-public class EnderBotMiningEvents extends ListenerAdapter {
+public class EBMiningEvents extends ListenerAdapter {
 
     @Override
     public void onGuildMessageReceived(@Nonnull GuildMessageReceivedEvent e) {
