@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import javax.annotation.Nonnull;
+import java.io.IOException;
 
 public class SystemEvents extends ListenerAdapter {
 
@@ -21,6 +22,11 @@ public class SystemEvents extends ListenerAdapter {
 
     @Override
     public void onDisconnect(@Nonnull DisconnectEvent e) {
+        try {
+            MCB.remindersManager.save();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
         MCB.logger.logStop();
     }
 

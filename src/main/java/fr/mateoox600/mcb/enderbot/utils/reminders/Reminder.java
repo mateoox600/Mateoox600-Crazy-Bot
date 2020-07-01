@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -16,14 +17,14 @@ public class Reminder {
     private final String text;
     private final long end;
 
-    public Reminder(long in, User member, TextChannel channel, String text) {
+    public Reminder(long in, User member, TextChannel channel, String text, boolean message) {
         this.member = member;
         this.channel = channel;
         this.text = text;
-        channel.sendMessage(parseMessageTime(in)).queue();
+        if (message)channel.sendMessage(parseMessageTime(in)).queue();
         Timer timer = new Timer();
         end = in + System.currentTimeMillis();
-        if (in <= 0) sendReminder();
+        if (in <= 0) timer.schedule(new Task(this), new Date(System.currentTimeMillis()+1));
         else timer.schedule(new Task(this), new Date(in + System.currentTimeMillis()));
     }
 
@@ -41,7 +42,8 @@ public class Reminder {
 
     public static Reminder getReminderBySaveMsg(String msg){
         String[] args = msg.split("/");
-        return new Reminder(Integer.parseInt(args[0])-System.currentTimeMillis(), MCB.jda.getUserById(args[2]), MCB.jda.getTextChannelById(args[3]), args[1]);
+        System.out.println("|" + args[2] + "|");
+        return new Reminder(Long.parseLong(args[0])-System.currentTimeMillis(), MCB.jda.getUserById(args[2]), MCB.jda.getTextChannelById(args[3]), args[1], false);
     }
 
     private String parseMessageTime(long in) {
@@ -98,6 +100,7 @@ class Task extends TimerTask {
     @Override
     public void run() {
         reminder.sendReminder();
+        MCB.remindersManager.reminders.remove(reminder);
     }
 
 }

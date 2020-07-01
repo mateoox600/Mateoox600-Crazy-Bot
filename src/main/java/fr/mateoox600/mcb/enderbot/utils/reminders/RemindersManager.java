@@ -8,6 +8,8 @@ import java.io.*;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class RemindersManager {
 
@@ -19,30 +21,32 @@ public class RemindersManager {
         remindersSaveFile = new File(MCB.config.getDataFolder(), "reminders.txt");
         if (!remindersSaveFile.exists()) remindersSaveFile.createNewFile();
         load();
+        Timer timer = new Timer();
+        timer.schedule(new RMManagerTask(), 1000*30);
     }
 
-    public void addReminder(String text, Member member, TextChannel channel, long in) {
-        reminders.add(new Reminder(in, member.getUser(), channel, text));
+    public void addReminder(String text, Member member, TextChannel channel, long in, boolean message) {
+        reminders.add(new Reminder(in, member.getUser(), channel, text, message));
     }
 
-    public static long parseReminderTime(String arg){
+    public static long parseReminderTime(String arg) {
         long totalTime = 0;
 
         StringBuilder loopingOn = new StringBuilder();
-        for (char arg_char : arg.toLowerCase().toCharArray()){
+        for (char arg_char : arg.toLowerCase().toCharArray()) {
             if (arg_char == 'd') {
-                totalTime += Integer.parseInt(loopingOn.toString())*24*60*60*1000;
+                totalTime += Integer.parseInt(loopingOn.toString()) * 24 * 60 * 60 * 1000;
                 loopingOn = new StringBuilder();
-            }else if (arg_char == 'h') {
-                totalTime += Integer.parseInt(loopingOn.toString())*60*60*1000;
+            } else if (arg_char == 'h') {
+                totalTime += Integer.parseInt(loopingOn.toString()) * 60 * 60 * 1000;
                 loopingOn = new StringBuilder();
-            }else if (arg_char == 'm') {
-                totalTime += Integer.parseInt(loopingOn.toString())*60*1000;
+            } else if (arg_char == 'm') {
+                totalTime += Integer.parseInt(loopingOn.toString()) * 60 * 1000;
                 loopingOn = new StringBuilder();
-            }else if (arg_char == 's') {
-                totalTime += Integer.parseInt(loopingOn.toString())*1000;
+            } else if (arg_char == 's') {
+                totalTime += Integer.parseInt(loopingOn.toString()) * 1000;
                 loopingOn = new StringBuilder();
-            }else loopingOn.append(arg_char);
+            } else loopingOn.append(arg_char);
         }
 
         return totalTime;
@@ -50,17 +54,31 @@ public class RemindersManager {
 
     public void save() throws IOException {
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(remindersSaveFile));
-        for (Reminder rm : reminders){
+        for (Reminder rm : reminders) {
             bufferedWriter.write(rm.getSaveMsg() + "\n");
         }
+        bufferedWriter.close();
     }
 
-    public void load() throws IOException{
+    public void load() throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(remindersSaveFile));
         String line;
-        while ((line = bufferedReader.readLine()) != null)
+        while ((line = bufferedReader.readLine()) != null) {
             reminders.add(Reminder.getReminderBySaveMsg(line));
+        }
+        bufferedReader.close();
     }
 }
+
+class RMManagerTask extends TimerTask{
+
+    @Override
+    public void run() {
+        try {
+            MCB.remindersManager.save();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

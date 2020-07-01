@@ -38,8 +38,6 @@ public class MCB {
 
         EBTower = new EBTower();
 
-        remindersManager = new RemindersManager();
-
         EventWaiter waiter = new EventWaiter();
 
         CommandClientBuilder client = new CommandClientBuilder();
@@ -54,7 +52,8 @@ public class MCB {
                 new EBTowerCommand(),
                 new StatusCommand(),
                 new StopCommand(),
-                new DebugCommand());
+                new DebugCommand(),
+                new ReminderCommand());
 
         JDABuilder jdaBuilder = JDABuilder.createDefault(config.getToken())
                 .setChunkingFilter(ChunkingFilter.ALL)
@@ -70,6 +69,8 @@ public class MCB {
         logger = new Logger(jda.getTextChannelById("718563766232547489"), jda.getTextChannelById("724315135228772413"));
 
         jda.awaitReady();
+
+        remindersManager = new RemindersManager();
 
         jda.getPresence().setActivity(Activity.playing(config.getStatus()));
 

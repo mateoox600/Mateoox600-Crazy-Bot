@@ -23,8 +23,8 @@ public class DebugCommand extends Command {
                 long time = RemindersManager.parseReminderTime(args[0]);
                 if (time <= 0) return;
                 StringBuilder stringBuilder = new StringBuilder();
-                for (String arg : Arrays.copyOfRange(args, 1, args.length)) stringBuilder.append(arg);
-                MCB.remindersManager.addReminder(stringBuilder.toString(), e.getMember(), e.getTextChannel(), time);
+                for (String arg : Arrays.copyOfRange(args, 1, args.length)) stringBuilder.append(arg).append(" ");
+                MCB.remindersManager.addReminder(stringBuilder.toString(), e.getMember(), e.getTextChannel(), time, true);
             }
         }
     }
