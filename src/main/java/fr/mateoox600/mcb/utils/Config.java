@@ -3,6 +3,7 @@ package fr.mateoox600.mcb.utils;
 import org.json.JSONObject;
 
 import java.io.*;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 
 public class Config {
@@ -42,8 +43,9 @@ public class Config {
 
     private String status;
     private final JSONObject config;
+    private final File dataFolder;
 
-    public Config(String ressourcesPath) throws IOException {
+    public Config(String ressourcesPath) throws IOException, URISyntaxException {
         InputStream in = getClass().getClassLoader().getResourceAsStream(ressourcesPath);
         InputStreamReader inr = new InputStreamReader(in, StandardCharsets.UTF_8);
         char[] cbuf = new char[2048];
@@ -53,26 +55,31 @@ public class Config {
         }
         config = new JSONObject(jsonFile.toString());
         status = config.getString("status_prefix") + config.getString("status_message");
+        dataFolder = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath().replace("%20", " ") + "/data");
     }
 
-    public String getPrefix(){
+    public String getPrefix() {
         return config.getString("prefix");
     }
 
-    public String getToken(){
+    public String getToken() {
         return config.getString("token");
     }
 
-    public String getOwnerId(){
+    public String getOwnerId() {
         return config.getString("owner_id");
     }
 
-    public String getStatus(){
+    public String getStatus() {
         return status;
     }
 
-    public String setStatus(String status){
+    public String setStatus(String status) {
         return this.status = config.getString("status_prefix") + status;
+    }
+
+    public File getDataFolder() {
+        return dataFolder;
     }
 
 }

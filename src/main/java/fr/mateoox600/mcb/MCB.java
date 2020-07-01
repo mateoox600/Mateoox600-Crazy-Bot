@@ -20,6 +20,7 @@ import net.dv8tion.jda.api.utils.MemberCachePolicy;
 
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class MCB {
 
@@ -27,11 +28,13 @@ public class MCB {
     public static EBTower EBTower;
     public static Config config;
     public static RemindersManager remindersManager;
+    public static JDA jda;
 
-    public static void main(String[] args) throws LoginException, InterruptedException, IOException {
+    public static void main(String[] args) throws LoginException, InterruptedException, URISyntaxException, IOException {
 
         config = new Config("config.json");
-        //config = new Config();
+
+        if (!config.getDataFolder().exists()) config.getDataFolder().mkdirs();
 
         EBTower = new EBTower();
 
@@ -63,7 +66,7 @@ public class MCB {
         //jdaBuilder.addEventListeners(new BinaryEvent());
         jdaBuilder.addEventListeners(new EBMiningEvents(), new GetRolesEvents(), new UserEvents());
 
-        JDA jda = jdaBuilder.build();
+        jda = jdaBuilder.build();
         logger = new Logger(jda.getTextChannelById("718563766232547489"), jda.getTextChannelById("724315135228772413"));
 
         jda.awaitReady();
