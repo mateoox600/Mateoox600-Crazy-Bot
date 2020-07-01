@@ -7,11 +7,11 @@ import fr.mateoox600.mcb.MCB;
 import java.io.IOException;
 import java.util.Arrays;
 
-public class StopCommand extends Command {
+public class SaveCommand extends Command {
 
-    public StopCommand() {
-        this.name = "stop";
-        this.help = "Bot Owner Command: Stop the bot";
+    public SaveCommand() {
+        this.name = "save";
+        this.help = "Bot Owner Command: Save the bot data";
     }
 
     @Override
@@ -24,8 +24,7 @@ public class StopCommand extends Command {
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
-            e.getJDA().shutdown();
-            System.exit(0);
+            e.getChannel().sendMessage("You made a save of all the bot data").queue();
         }
     }
 

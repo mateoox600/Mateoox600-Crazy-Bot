@@ -1,11 +1,11 @@
-package fr.mateoox600.mcb.enderbot.utils.reminders;
+package fr.mateoox600.mcb.utils.reminders;
 
 import fr.mateoox600.mcb.MCB;
-import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -21,29 +21,32 @@ public class Reminder {
         this.member = member;
         this.channel = channel;
         this.text = text;
-        if (message)channel.sendMessage(parseMessageTime(in)).queue();
+        if (message) channel.sendMessage(parseMessageTime(in)).queue();
         Timer timer = new Timer();
         end = in + System.currentTimeMillis();
-        if (in <= 0) timer.schedule(new Task(this), new Date(System.currentTimeMillis()+1));
+        if (in <= 0) timer.schedule(new Task(this), new Date(System.currentTimeMillis() + 1));
         else timer.schedule(new Task(this), new Date(in + System.currentTimeMillis()));
     }
 
-    private String getMessage() {
-        return "<@" + member.getId() + "> Reminder: " + text;
+    private MessageEmbed getMessage() {
+        EmbedBuilder embedBuilder = new EmbedBuilder();
+        embedBuilder.setAuthor(member.getName(), null, member.getEffectiveAvatarUrl());
+        embedBuilder.setColor(channel.getGuild().getMember(member).getRoles().get(0).getColor());
+        embedBuilder.addField("Reminder:", text, false);
+        return embedBuilder.build();
     }
 
     public void sendReminder() {
-        channel.sendMessage(getMessage()).queue();
+        channel.sendMessage(member.getAsMention()).queue(msg -> channel.sendMessage(getMessage()).queue());
     }
 
-    public String getSaveMsg(){
+    public String getSaveMsg() {
         return end + "/" + text + "/" + member.getId() + "/" + channel.getId();
     }
 
-    public static Reminder getReminderBySaveMsg(String msg){
+    public static Reminder getReminderBySaveMsg(String msg) {
         String[] args = msg.split("/");
-        System.out.println("|" + args[2] + "|");
-        return new Reminder(Long.parseLong(args[0])-System.currentTimeMillis(), MCB.jda.getUserById(args[2]), MCB.jda.getTextChannelById(args[3]), args[1], false);
+        return new Reminder(Long.parseLong(args[0]) - System.currentTimeMillis(), MCB.jda.getUserById(args[2]), MCB.jda.getTextChannelById(args[3]), args[1], false);
     }
 
     private String parseMessageTime(long in) {
@@ -51,9 +54,9 @@ public class Reminder {
         int days = Math.toIntExact(in / 1000 / 60 / 60 / 24);
         if (days > 0) {
             if (days > 1) {
-                stringBuilder.append(days).append(" hours, ");
+                stringBuilder.append(days).append(" days, ");
             } else {
-                stringBuilder.append(days).append(" hours, ");
+                stringBuilder.append(days).append(" day, ");
             }
         }
         in -= days * 24 * 60 * 60 * 1000;
@@ -62,7 +65,7 @@ public class Reminder {
             if (hours > 1) {
                 stringBuilder.append(hours).append(" hours, ");
             } else {
-                stringBuilder.append(hours).append(" hours, ");
+                stringBuilder.append(hours).append(" hour, ");
             }
         }
         in -= hours * 60 * 60 * 1000;

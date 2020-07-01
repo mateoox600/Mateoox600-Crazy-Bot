@@ -3,7 +3,7 @@ package fr.mateoox600.mcb.commands;
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
 import fr.mateoox600.mcb.MCB;
-import fr.mateoox600.mcb.enderbot.utils.reminders.RemindersManager;
+import fr.mateoox600.mcb.utils.reminders.RemindersManager;
 
 import java.util.Arrays;
 

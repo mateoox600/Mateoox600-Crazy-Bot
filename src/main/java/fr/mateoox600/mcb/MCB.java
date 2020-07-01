@@ -4,9 +4,10 @@ import com.jagrosh.jdautilities.command.CommandClientBuilder;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import fr.mateoox600.mcb.commands.*;
 import fr.mateoox600.mcb.enderbot.commands.EBTowerCommand;
+import fr.mateoox600.mcb.enderbot.events.EBMessageEvents;
 import fr.mateoox600.mcb.enderbot.utils.EBTower;
 import fr.mateoox600.mcb.enderbot.events.EBMiningEvents;
-import fr.mateoox600.mcb.enderbot.utils.reminders.RemindersManager;
+import fr.mateoox600.mcb.utils.reminders.RemindersManager;
 import fr.mateoox600.mcb.events.GetRolesEvents;
 import fr.mateoox600.mcb.events.UserEvents;
 import fr.mateoox600.mcb.utils.Config;
@@ -53,7 +54,8 @@ public class MCB {
                 new StatusCommand(),
                 new StopCommand(),
                 new DebugCommand(),
-                new ReminderCommand());
+                new ReminderCommand(),
+                new SaveCommand());
 
         JDABuilder jdaBuilder = JDABuilder.createDefault(config.getToken())
                 .setChunkingFilter(ChunkingFilter.ALL)
@@ -63,10 +65,13 @@ public class MCB {
                 .addEventListeners(waiter, client.build());
 
         //jdaBuilder.addEventListeners(new BinaryEvent());
-        jdaBuilder.addEventListeners(new EBMiningEvents(), new GetRolesEvents(), new UserEvents());
+        jdaBuilder.addEventListeners(new EBMiningEvents(),
+                new GetRolesEvents(),
+                new UserEvents(),
+                new EBMessageEvents());
 
         jda = jdaBuilder.build();
-        logger = new Logger(jda.getTextChannelById("718563766232547489"), jda.getTextChannelById("724315135228772413"));
+        logger = new Logger(jda.getTextChannelById("718563766232547489"));
 
         jda.awaitReady();
 

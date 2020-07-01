@@ -1,11 +1,10 @@
-package fr.mateoox600.mcb.enderbot.utils.reminders;
+package fr.mateoox600.mcb.utils.reminders;
 
 import fr.mateoox600.mcb.MCB;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
 
 import java.io.*;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -22,7 +21,7 @@ public class RemindersManager {
         if (!remindersSaveFile.exists()) remindersSaveFile.createNewFile();
         load();
         Timer timer = new Timer();
-        timer.schedule(new RMManagerTask(), 1000*30);
+        timer.schedule(new RMManagerTask(), 1000 * 30, 1000*30);
     }
 
     public void addReminder(String text, Member member, TextChannel channel, long in, boolean message) {
@@ -70,7 +69,7 @@ public class RemindersManager {
     }
 }
 
-class RMManagerTask extends TimerTask{
+class RMManagerTask extends TimerTask {
 
     @Override
     public void run() {

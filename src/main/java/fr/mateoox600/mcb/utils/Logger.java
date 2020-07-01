@@ -6,19 +6,9 @@ import net.dv8tion.jda.api.entities.TextChannel;
 public class Logger {
 
     private final TextChannel channel;
-    private final TextChannel pChannel;
 
-    public Logger(TextChannel channel, TextChannel pChannel) {
+    public Logger(TextChannel channel) {
         this.channel = channel;
-        this.pChannel = pChannel;
-    }
-
-    public void logStart(){
-        pChannel.sendMessage("Bot started").queue();
-    }
-
-    public void logStop(){
-        pChannel.sendMessage("Bot stop").queue();
     }
 
     public void logKick(Member member, Member kickMember, String reason) {
