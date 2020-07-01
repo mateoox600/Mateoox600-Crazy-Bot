@@ -1,1 +1,0 @@
-release: java -jar target/MCB-1.0.0.jar
