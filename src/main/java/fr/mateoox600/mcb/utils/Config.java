@@ -3,10 +3,11 @@ package fr.mateoox600.mcb.utils;
 import org.json.JSONObject;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 public class Config {
 
-    private String status;
+    /*private String status;
 
     public final String STATUS_PREFIX = "(In Dev) ";
     public final String STATUS_MESSAGE = "Existing... little bit";
@@ -36,18 +37,19 @@ public class Config {
 
     public String setStatus(String status) {
         return this.status = this.STATUS_PREFIX + status;
-    }
+    }*/
 
 
-    /*private String status;
-    private JSONObject config;
+    private String status;
+    private final JSONObject config;
 
     public Config(String ressourcesPath) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(new File(getClass().getClassLoader().getResource(ressourcesPath).getPath().replace("%20", " "))));
+        InputStream in = getClass().getClassLoader().getResourceAsStream(ressourcesPath);
+        InputStreamReader inr = new InputStreamReader(in, StandardCharsets.UTF_8);
+        char[] cbuf = new char[2048];
         StringBuilder jsonFile = new StringBuilder();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            jsonFile.append(line).append("\n");
+        while (inr.read(cbuf, 0, cbuf.length) != -1) {
+            jsonFile.append(new String(cbuf)).append("\n");
         }
         config = new JSONObject(jsonFile.toString());
         status = config.getString("status_prefix") + config.getString("status_message");
@@ -71,6 +73,6 @@ public class Config {
 
     public String setStatus(String status){
         return this.status = config.getString("status_prefix") + status;
-    }*/
+    }
 
 }

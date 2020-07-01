@@ -30,8 +30,8 @@ public class MCB {
 
     public static void main(String[] args) throws LoginException, InterruptedException, IOException {
 
-        //config = new Config("config.json");
-        config = new Config();
+        config = new Config("config.json");
+        //config = new Config();
 
         EBTower = new EBTower();
 
