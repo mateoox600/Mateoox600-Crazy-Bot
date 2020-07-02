@@ -51,6 +51,20 @@ public class RemindersManager {
         return totalTime;
     }
 
+    public static String findTimeIn(String message) {
+        for (String words : message.split(" ")){
+            try{
+                long time = RemindersManager.parseReminderTime(words);
+                if (time > 0) {
+                    return words;
+                }
+            }catch (Exception exception){
+                continue;
+            }
+        }
+        return "0s";
+    }
+
     public void save() throws IOException {
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(remindersSaveFile));
         for (Reminder rm : reminders) {
