@@ -11,7 +11,7 @@ public class ReminderCommand extends Command {
 
     public ReminderCommand() {
         this.name = "remindme";
-        this.help = "Bot Owner Command: Debug in dev commands";
+        this.help = "Reminder command (time = `1d2h4m25s`)";
         this.aliases = new String[]{"remind", "rmme", "reminder"};
         this.arguments = "<time> <message>";
     }

@@ -1,4 +1,4 @@
-package fr.mateoox600.mcb.commands;
+package fr.mateoox600.mcb.commands.mod;
 
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
