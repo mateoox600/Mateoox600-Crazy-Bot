@@ -20,12 +20,18 @@ public class RemindersManager {
         remindersSaveFile = new File(MCB.config.getDataFolder(), "reminders.txt");
         if (!remindersSaveFile.exists()) remindersSaveFile.createNewFile();
         load();
+        save();
         Timer timer = new Timer();
         timer.schedule(new RMManagerTask(), 1000 * 30, 1000*30);
     }
 
     public void addReminder(String text, Member member, TextChannel channel, long in, boolean message) {
         reminders.add(new Reminder(in, member.getUser(), channel, text, message));
+        try {
+            save();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static long parseReminderTime(String arg) {
@@ -58,8 +64,7 @@ public class RemindersManager {
                 if (time > 0) {
                     return words;
                 }
-            }catch (Exception exception){
-                continue;
+            }catch (Exception ignored){
             }
         }
         return "0s";

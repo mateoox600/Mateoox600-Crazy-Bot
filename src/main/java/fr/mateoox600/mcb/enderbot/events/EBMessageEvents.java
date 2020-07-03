@@ -128,6 +128,18 @@ public class EBMessageEvents extends ListenerAdapter {
                             break;
                         }
                     }
+
+                // check if the message is a village claim message
+                }else if (e.getMessage().getContentRaw().startsWith("Vous venez de récupérer ") || e.getMessage().getContentRaw().startsWith("You just claimed ")) {
+                    MessageHistory messageHistory = e.getChannel().getHistoryBefore(e.getMessage(), 10).complete();
+                    for (Message message : messageHistory.getRetrievedHistory()) {
+                        if ((message.getContentRaw().startsWith(">vi") || message.getContentRaw().startsWith(">village")) &&
+                                (message.getContentRaw().endsWith("claim") || message.getContentRaw().endsWith("c"))) {
+                            MCB.remindersManager.addReminder("EnderBot Village", message.getMember(), e.getChannel(), RemindersManager.parseReminderTime("1d"), false);
+                            message.addReaction(e.getGuild().getEmotesByName("MCB", false).get(0)).queue();
+                            break;
+                        }
+                    }
                 }
             }
         }

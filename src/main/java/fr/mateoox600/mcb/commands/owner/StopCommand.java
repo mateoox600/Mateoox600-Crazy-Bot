@@ -24,6 +24,8 @@ public class StopCommand extends Command {
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
+            e.getChannel().sendMessage("reminders saved").queue();
+            e.getChannel().sendMessage("jda shutdown").queue();
             e.getJDA().shutdown();
             System.exit(0);
         }
