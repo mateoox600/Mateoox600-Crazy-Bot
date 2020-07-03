@@ -4,6 +4,7 @@ import fr.mateoox600.mcb.MCB;
 import fr.mateoox600.mcb.utils.reminders.RemindersManager;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageHistory;
+import net.dv8tion.jda.api.events.message.MessageUpdateEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -90,6 +91,7 @@ public class EBMessageEvents extends ListenerAdapter {
                                 long i = RemindersManager.parseReminderTime(words.substring(0, words.length()-2));
                                 if (i > 0) {
                                     time = words;
+                                    break;
                                 }
                             } catch (Exception ignored) {
                             }
@@ -109,11 +111,44 @@ public class EBMessageEvents extends ListenerAdapter {
                 else if (e.getMessage().getContentRaw().startsWith("Vous avez commencé la création de ") || e.getMessage().getContentRaw().startsWith("You started the creation of ")){
                     MessageHistory messageHistory = e.getChannel().getHistoryBefore(e.getMessage(), 10).complete();
                     for (Message message : messageHistory.getRetrievedHistory()) {
-                        if (message.getContentRaw().startsWith(">fish") || message.getContentRaw().startsWith(">fi")) {
+                        if (message.getContentRaw().startsWith(">cau") || message.getContentRaw().startsWith(">cauldron")) {
                             MCB.remindersManager.addReminder("EnderBot Cauldron", message.getMember(), e.getChannel(), RemindersManager.parseReminderTime(e.getMessage().getContentRaw().split(" ")[e.getMessage().getContentRaw().split(" ").length-1]), false);
                             message.addReaction(e.getGuild().getEmotesByName("MCB", false).get(0)).queue();
                             break;
                         }
+                    }
+
+                // check if the message is a generator break message
+                }else if (e.getMessage().getContentRaw().contains(" Ouch ! Il semblerait que vous soyez arrivé trop tard ... Vous venez de casser votre générateur (RIP) et n'avez rien récupéré, votre générateur doit maintenant se réparer et sera de nouveau disponible dans 24h...") || e.getMessage().getContentRaw().contains(" Ouch ! It looks like you came too late ... You just broke your generator (RIP) and you have not gained anything, your generator must now be repaired and will be available again in 24 hours...")) {
+                    MessageHistory messageHistory = e.getChannel().getHistoryBefore(e.getMessage(), 10).complete();
+                    for (Message message : messageHistory.getRetrievedHistory()) {
+                        if (message.getContentRaw().startsWith(">g") || message.getContentRaw().startsWith(">gen") || message.getContentRaw().startsWith(">generator")) {
+                            MCB.remindersManager.addReminder("EnderBot Generator Repair", message.getMember(), e.getChannel(), RemindersManager.parseReminderTime("1d"), false);
+                            message.addReaction(e.getGuild().getEmotesByName("MCB", false).get(0)).queue();
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onMessageUpdate(@Nonnull MessageUpdateEvent e) {
+
+        // check message author is EnderBot
+        if (e.getAuthor().getId().equals("280726849842053120")) {
+
+            // check the edited message is a factory produce start
+            if (e.getMessage().getContentRaw().contains(" - La production d'un composant de type ") || e.getMessage().getContentRaw().contains(" - Started production of one component of type ")) {
+                MessageHistory messageHistory = e.getChannel().getHistoryBefore(e.getMessage(), 10).complete();
+                for (Message message : messageHistory.getRetrievedHistory()) {
+                    if ((message.getContentRaw().startsWith(">fac") || message.getContentRaw().startsWith(">factory")) &&
+                            (message.getContentRaw().contains("p") || message.getContentRaw().contains("produce"))) {
+                        String time = e.getMessage().getContentRaw().split("\\*\\*")[1].substring(0, e.getMessage().getContentRaw().split("\\*\\*")[1].length()-8) + "m";
+                        MCB.remindersManager.addReminder("EnderBot Factory", message.getMember(), e.getTextChannel(), RemindersManager.parseReminderTime(time), false);
+                        message.addReaction(e.getGuild().getEmotesByName("MCB", false).get(0)).queue();
+                        break;
                     }
                 }
             }
