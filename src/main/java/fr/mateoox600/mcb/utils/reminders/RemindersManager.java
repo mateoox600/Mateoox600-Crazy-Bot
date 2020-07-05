@@ -22,16 +22,7 @@ public class RemindersManager {
         load();
         save();
         Timer timer = new Timer();
-        timer.schedule(new RMManagerTask(), 1000 * 30, 1000*30);
-    }
-
-    public void addReminder(String text, Member member, TextChannel channel, long in, boolean message) {
-        reminders.add(new Reminder(in, member.getUser(), channel, text, message));
-        try {
-            save();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        timer.schedule(new RMManagerTask(), 1000 * 30, 1000 * 30);
     }
 
     public static long parseReminderTime(String arg) {
@@ -58,16 +49,25 @@ public class RemindersManager {
     }
 
     public static String findTimeIn(String message) {
-        for (String words : message.split(" ")){
-            try{
+        for (String words : message.split(" ")) {
+            try {
                 long time = RemindersManager.parseReminderTime(words);
                 if (time > 0) {
                     return words;
                 }
-            }catch (Exception ignored){
+            } catch (Exception ignored) {
             }
         }
         return "0s";
+    }
+
+    public void addReminder(String text, Member member, TextChannel channel, long in, boolean message) {
+        reminders.add(new Reminder(in, member.getUser(), channel, text, message));
+        try {
+            save();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void save() throws IOException {

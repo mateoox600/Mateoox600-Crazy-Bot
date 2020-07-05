@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 public class EBTowerCommand extends Command {
 
-    public EBTowerCommand(){
+    public EBTowerCommand() {
         this.name = "ebtower";
         this.help = "Know which level of the tower of enderbot you can go";
         this.arguments = "<defense>";
@@ -19,7 +19,7 @@ public class EBTowerCommand extends Command {
     protected void execute(CommandEvent e) {
         String[] args = e.getMessage().getContentRaw().split("\\s+");
         args = Arrays.copyOfRange(args, 1, args.length);
-        if(args.length > 0){
+        if (args.length > 0) {
             e.getChannel().sendMessage("You can go to the level " + MCB.EBTower.getBeatableBoss(Integer.parseInt(args[0])) + " of the tower!").queue();
         }
     }

@@ -32,7 +32,7 @@ public class EBMessageEvents extends ListenerAdapter {
                         }
                     }
 
-                // check the first field of the embed to see if this is a port claim
+                    // check the first field of the embed to see if this is a port claim
                 } else if (e.getMessage().getEmbeds().get(0).getFields().get(0).getName().contains("Fishing")) {
                     MessageHistory messageHistory = e.getChannel().getHistoryBefore(e.getMessage(), 10).complete();
                     for (Message message : messageHistory.getRetrievedHistory()) {
@@ -57,7 +57,7 @@ public class EBMessageEvents extends ListenerAdapter {
                         }
                     }
 
-                // check if the message is a generator start
+                    // check if the message is a generator start
                 } else if (e.getMessage().getContentRaw().endsWith("Votre générateur vient de démarrer. Revenez dans 4h, mais ne soyez pas en retard ;)") || e.getMessage().getContentRaw().startsWith("Your generator has been started. Come back in 4 hours, but don't be too late. ;)")) {
                     MessageHistory messageHistory = e.getChannel().getHistoryBefore(e.getMessage(), 10).complete();
                     for (Message message : messageHistory.getRetrievedHistory()) {
@@ -69,7 +69,7 @@ public class EBMessageEvents extends ListenerAdapter {
                         }
                     }
 
-                // check if the message is a drill claim
+                    // check if the message is a drill claim
                 } else if (e.getMessage().getContentRaw().contains("Félicitations ! Votre foreuse vient de vous rapporter") || e.getMessage().getContentRaw().contains("Congratulations ! Your drill has just brought you")) {
                     MessageHistory messageHistory = e.getChannel().getHistoryBefore(e.getMessage(), 10).complete();
                     for (Message message : messageHistory.getRetrievedHistory()) {
@@ -83,12 +83,12 @@ public class EBMessageEvents extends ListenerAdapter {
                 }
 
                 // check if the message is a fishing
-                else if (e.getMessage().getContentRaw().contains(" - Vous avez attrapé ") || e.getMessage().getContentRaw().contains(" - You caught ")){
+                else if (e.getMessage().getContentRaw().contains(" - Vous avez attrapé ") || e.getMessage().getContentRaw().contains(" - You caught ")) {
                     String time = "";
-                    for (String words : e.getMessage().getContentRaw().split(" ")){
+                    for (String words : e.getMessage().getContentRaw().split(" ")) {
                         if (words.contains(")")) {
                             try {
-                                long i = RemindersManager.parseReminderTime(words.substring(0, words.length()-2));
+                                long i = RemindersManager.parseReminderTime(words.substring(0, words.length() - 2));
                                 if (i > 0) {
                                     time = words;
                                     break;
@@ -108,18 +108,18 @@ public class EBMessageEvents extends ListenerAdapter {
                 }
 
                 // check if the message is a cau start message
-                else if (e.getMessage().getContentRaw().startsWith("Vous avez commencé la création de ") || e.getMessage().getContentRaw().startsWith("You started the creation of ")){
+                else if (e.getMessage().getContentRaw().startsWith("Vous avez commencé la création de ") || e.getMessage().getContentRaw().startsWith("You started the creation of ")) {
                     MessageHistory messageHistory = e.getChannel().getHistoryBefore(e.getMessage(), 10).complete();
                     for (Message message : messageHistory.getRetrievedHistory()) {
                         if (message.getContentRaw().startsWith(">cau") || message.getContentRaw().startsWith(">cauldron")) {
-                            MCB.remindersManager.addReminder("EnderBot Cauldron", message.getMember(), e.getChannel(), RemindersManager.parseReminderTime(e.getMessage().getContentRaw().split(" ")[e.getMessage().getContentRaw().split(" ").length-1]), false);
+                            MCB.remindersManager.addReminder("EnderBot Cauldron", message.getMember(), e.getChannel(), RemindersManager.parseReminderTime(e.getMessage().getContentRaw().split(" ")[e.getMessage().getContentRaw().split(" ").length - 1]), false);
                             message.addReaction(e.getGuild().getEmotesByName("MCB", false).get(0)).queue();
                             break;
                         }
                     }
 
-                // check if the message is a generator break message
-                }else if (e.getMessage().getContentRaw().contains(" Ouch ! Il semblerait que vous soyez arrivé trop tard ... Vous venez de casser votre générateur (RIP) et n'avez rien récupéré, votre générateur doit maintenant se réparer et sera de nouveau disponible dans 24h...") || e.getMessage().getContentRaw().contains(" Ouch ! It looks like you came too late ... You just broke your generator (RIP) and you have not gained anything, your generator must now be repaired and will be available again in 24 hours...")) {
+                    // check if the message is a generator break message
+                } else if (e.getMessage().getContentRaw().contains(" Ouch ! Il semblerait que vous soyez arrivé trop tard ... Vous venez de casser votre générateur (RIP) et n'avez rien récupéré, votre générateur doit maintenant se réparer et sera de nouveau disponible dans 24h...") || e.getMessage().getContentRaw().contains(" Ouch ! It looks like you came too late ... You just broke your generator (RIP) and you have not gained anything, your generator must now be repaired and will be available again in 24 hours...")) {
                     MessageHistory messageHistory = e.getChannel().getHistoryBefore(e.getMessage(), 10).complete();
                     for (Message message : messageHistory.getRetrievedHistory()) {
                         if (message.getContentRaw().startsWith(">g") || message.getContentRaw().startsWith(">gen") || message.getContentRaw().startsWith(">generator")) {
@@ -129,13 +129,25 @@ public class EBMessageEvents extends ListenerAdapter {
                         }
                     }
 
-                // check if the message is a village claim message
-                }else if (e.getMessage().getContentRaw().startsWith("Vous venez de récupérer ") || e.getMessage().getContentRaw().startsWith("You just claimed ")) {
+                    // check if the message is a village claim message
+                } else if (e.getMessage().getContentRaw().startsWith("Vous venez de récupérer ") || e.getMessage().getContentRaw().startsWith("You just claimed ")) {
                     MessageHistory messageHistory = e.getChannel().getHistoryBefore(e.getMessage(), 10).complete();
                     for (Message message : messageHistory.getRetrievedHistory()) {
                         if ((message.getContentRaw().startsWith(">vi") || message.getContentRaw().startsWith(">village")) &&
                                 (message.getContentRaw().endsWith("claim") || message.getContentRaw().endsWith("c"))) {
                             MCB.remindersManager.addReminder("EnderBot Village", message.getMember(), e.getChannel(), RemindersManager.parseReminderTime("1d"), false);
+                            message.addReaction(e.getGuild().getEmotesByName("MCB", false).get(0)).queue();
+                            break;
+                        }
+                    }
+
+                    // check if the message is rep giving message
+                } else if (e.getMessage().getContentRaw().contains(" - Votre point de réputation a été donné avec succès à ") || e.getMessage().getContentRaw().startsWith(" - Your reputation point has been successfully given to ")) {
+                    MessageHistory messageHistory = e.getChannel().getHistoryBefore(e.getMessage(), 10).complete();
+                    for (Message message : messageHistory.getRetrievedHistory()) {
+                        if ((message.getContentRaw().startsWith(">rep") || message.getContentRaw().startsWith(">reputation")) &&
+                                message.getContentRaw().contains(e.getMessage().getContentRaw().split(" ")[e.getMessage().getContentRaw().split(" ").length - 1])) {
+                            MCB.remindersManager.addReminder("EnderBot Reputation", message.getMember(), e.getChannel(), RemindersManager.parseReminderTime("1d"), false);
                             message.addReaction(e.getGuild().getEmotesByName("MCB", false).get(0)).queue();
                             break;
                         }
@@ -157,7 +169,7 @@ public class EBMessageEvents extends ListenerAdapter {
                 for (Message message : messageHistory.getRetrievedHistory()) {
                     if ((message.getContentRaw().startsWith(">fac") || message.getContentRaw().startsWith(">factory")) &&
                             (message.getContentRaw().contains("p") || message.getContentRaw().contains("produce"))) {
-                        String time = e.getMessage().getContentRaw().split("\\*\\*")[1].substring(0, e.getMessage().getContentRaw().split("\\*\\*")[1].length()-8) + "m";
+                        String time = e.getMessage().getContentRaw().split("\\*\\*")[1].substring(0, e.getMessage().getContentRaw().split("\\*\\*")[1].length() - 8) + "m";
                         MCB.remindersManager.addReminder("EnderBot Factory", message.getMember(), e.getTextChannel(), RemindersManager.parseReminderTime(time), false);
                         message.addReaction(e.getGuild().getEmotesByName("MCB", false).get(0)).queue();
                         break;

@@ -28,6 +28,11 @@ public class Reminder {
         else timer.schedule(new Task(this), new Date(in + System.currentTimeMillis()));
     }
 
+    public static Reminder getReminderBySaveMsg(String msg) {
+        String[] args = msg.split("/");
+        return new Reminder(Long.parseLong(args[0]) - System.currentTimeMillis(), MCB.jda.getUserById(args[2]), MCB.jda.getTextChannelById(args[3]), args[1], false);
+    }
+
     private MessageEmbed getMessage() {
         EmbedBuilder embedBuilder = new EmbedBuilder();
         embedBuilder.setAuthor(member.getName(), null, member.getEffectiveAvatarUrl());
@@ -42,11 +47,6 @@ public class Reminder {
 
     public String getSaveMsg() {
         return end + "/" + text + "/" + member.getId() + "/" + channel.getId();
-    }
-
-    public static Reminder getReminderBySaveMsg(String msg) {
-        String[] args = msg.split("/");
-        return new Reminder(Long.parseLong(args[0]) - System.currentTimeMillis(), MCB.jda.getUserById(args[2]), MCB.jda.getTextChannelById(args[3]), args[1], false);
     }
 
     private String parseMessageTime(long in) {
@@ -94,7 +94,7 @@ public class Reminder {
 
 class Task extends TimerTask {
 
-    private Reminder reminder;
+    private final Reminder reminder;
 
     public Task(Reminder reminder) {
         this.reminder = reminder;

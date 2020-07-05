@@ -2,7 +2,10 @@ package fr.mateoox600.mcb;
 
 import com.jagrosh.jdautilities.command.CommandClientBuilder;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
-import fr.mateoox600.mcb.commands.*;
+import fr.mateoox600.mcb.commands.BinaryCommand;
+import fr.mateoox600.mcb.commands.CalcCommand;
+import fr.mateoox600.mcb.commands.PingCommand;
+import fr.mateoox600.mcb.commands.ReminderCommand;
 import fr.mateoox600.mcb.commands.mod.KickCommand;
 import fr.mateoox600.mcb.commands.mod.ReportCommand;
 import fr.mateoox600.mcb.commands.owner.DebugCommand;
@@ -11,13 +14,13 @@ import fr.mateoox600.mcb.commands.owner.StatusCommand;
 import fr.mateoox600.mcb.commands.owner.StopCommand;
 import fr.mateoox600.mcb.enderbot.commands.EBTowerCommand;
 import fr.mateoox600.mcb.enderbot.events.EBMessageEvents;
-import fr.mateoox600.mcb.enderbot.utils.EBTower;
 import fr.mateoox600.mcb.enderbot.events.EBMiningEvents;
-import fr.mateoox600.mcb.utils.reminders.RemindersManager;
+import fr.mateoox600.mcb.enderbot.utils.EBTower;
 import fr.mateoox600.mcb.events.GetRolesEvents;
 import fr.mateoox600.mcb.events.UserEvents;
 import fr.mateoox600.mcb.utils.Config;
 import fr.mateoox600.mcb.utils.Logger;
+import fr.mateoox600.mcb.utils.reminders.RemindersManager;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
@@ -37,6 +40,8 @@ public class MCB {
     public static RemindersManager remindersManager;
     public static JDA jda;
 
+    // TODO: 05/07/2020 game guess number with interface 
+
     public static void main(String[] args) throws LoginException, InterruptedException, URISyntaxException, IOException {
 
         config = new Config("config.json");
@@ -53,14 +58,14 @@ public class MCB {
 
         client.addCommands(new BinaryCommand(),
                 new PingCommand(),
+                new CalcCommand(),
+                new ReminderCommand(),
+                new EBTowerCommand(),
                 new KickCommand(),
                 new ReportCommand(),
-                new CalcCommand(),
-                new EBTowerCommand(),
-                new StatusCommand(),
                 new StopCommand(),
                 new DebugCommand(),
-                new ReminderCommand(),
+                new StatusCommand(),
                 new SaveCommand());
 
         JDABuilder jdaBuilder = JDABuilder.createDefault(config.getToken())
@@ -71,9 +76,9 @@ public class MCB {
                 .addEventListeners(waiter, client.build());
 
         //jdaBuilder.addEventListeners(new BinaryEvent());
-        jdaBuilder.addEventListeners(new EBMiningEvents(),
+        jdaBuilder.addEventListeners(new UserEvents(),
                 new GetRolesEvents(),
-                new UserEvents(),
+                new EBMiningEvents(),
                 new EBMessageEvents());
 
         jda = jdaBuilder.build();

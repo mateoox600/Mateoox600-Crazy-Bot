@@ -22,7 +22,7 @@ public class Logger {
             channel.sendMessage("<@" + member.getId() + "> convert binary to text: ```" + message + "```to ```" + result + "```").queue();
     }
 
-    public void logStatusChangeNoPerm(Member member, String message){
+    public void logStatusChangeNoPerm(Member member, String message) {
         channel.sendMessage("<@" + member.getId() + "> try to change the status of the bot to: ```" + message + "```").queue();
     }
 

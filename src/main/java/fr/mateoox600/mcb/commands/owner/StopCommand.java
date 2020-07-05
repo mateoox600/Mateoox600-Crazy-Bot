@@ -24,10 +24,13 @@ public class StopCommand extends Command {
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
-            e.getChannel().sendMessage("reminders saved").queue();
-            e.getChannel().sendMessage("jda shutdown").queue();
-            e.getJDA().shutdown();
-            System.exit(0);
+            e.getChannel().sendMessage("reminders saved").queue(msg -> e.getChannel().sendMessage("jda shutdown").queue(msg1 -> e.getJDA().shutdown()));
+            int exitCode = 0;
+            try {
+                if (args.length > 0) exitCode = Integer.parseInt(args[0]);
+            } catch (Exception ignored) {
+            }
+            System.exit(exitCode);
         }
     }
 
