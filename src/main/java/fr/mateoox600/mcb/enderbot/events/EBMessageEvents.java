@@ -146,7 +146,7 @@ public class EBMessageEvents extends ListenerAdapter {
                     MessageHistory messageHistory = e.getChannel().getHistoryBefore(e.getMessage(), 10).complete();
                     for (Message message : messageHistory.getRetrievedHistory()) {
                         if ((message.getContentRaw().startsWith(">rep") || message.getContentRaw().startsWith(">reputation")) &&
-                                message.getContentRaw().contains(e.getMessage().getContentRaw().split(" ")[e.getMessage().getContentRaw().split(" ").length - 1])) {
+                                message.getContentRaw().contains(e.getMessage().getContentRaw().split(" ")[e.getMessage().getContentRaw().split(" ").length - 2])) {
                             MCB.remindersManager.addReminder("EnderBot Reputation", message.getMember(), e.getChannel(), RemindersManager.parseReminderTime("1d"), false);
                             message.addReaction(e.getGuild().getEmotesByName("MCB", false).get(0)).queue();
                             break;
@@ -170,7 +170,7 @@ public class EBMessageEvents extends ListenerAdapter {
                     if ((message.getContentRaw().startsWith(">fac") || message.getContentRaw().startsWith(">factory")) &&
                             (message.getContentRaw().contains("p") || message.getContentRaw().contains("produce"))) {
                         String time = e.getMessage().getContentRaw().split("\\*\\*")[1].substring(0, e.getMessage().getContentRaw().split("\\*\\*")[1].length() - 8) + "m";
-                        MCB.remindersManager.addReminder("EnderBot Factory", message.getMember(), e.getTextChannel(), RemindersManager.parseReminderTime(time), false);
+                        MCB.remindersManager.addReminder("EnderBot Factory", message.getMember(), e.getTextChannel(), RemindersManager.parseReminderTime(time)+RemindersManager.parseReminderTime("1m"), false);
                         message.addReaction(e.getGuild().getEmotesByName("MCB", false).get(0)).queue();
                         break;
                     }

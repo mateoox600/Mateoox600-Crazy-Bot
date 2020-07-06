@@ -16,6 +16,7 @@ import fr.mateoox600.mcb.enderbot.commands.EBTowerCommand;
 import fr.mateoox600.mcb.enderbot.events.EBMessageEvents;
 import fr.mateoox600.mcb.enderbot.events.EBMiningEvents;
 import fr.mateoox600.mcb.enderbot.utils.EBTower;
+import fr.mateoox600.mcb.events.BinaryEvent;
 import fr.mateoox600.mcb.events.GetRolesEvents;
 import fr.mateoox600.mcb.events.UserEvents;
 import fr.mateoox600.mcb.utils.Config;
@@ -24,6 +25,7 @@ import fr.mateoox600.mcb.utils.reminders.RemindersManager;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
@@ -31,6 +33,7 @@ import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 
 public class MCB {
 
@@ -39,6 +42,7 @@ public class MCB {
     public static Config config;
     public static RemindersManager remindersManager;
     public static JDA jda;
+    public static HashMap<String, Message> reactionsEventMessage = new HashMap<>();
 
     // TODO: 05/07/2020 game guess number with interface 
 
@@ -75,16 +79,17 @@ public class MCB {
                 .setActivity(Activity.playing("loading..."))
                 .addEventListeners(waiter, client.build());
 
-        //jdaBuilder.addEventListeners(new BinaryEvent());
         jdaBuilder.addEventListeners(new UserEvents(),
                 new GetRolesEvents(),
                 new EBMiningEvents(),
-                new EBMessageEvents());
+                new EBMessageEvents(),
+                new BinaryEvent());
 
         jda = jdaBuilder.build();
-        logger = new Logger(jda.getTextChannelById("718563766232547489"));
 
         jda.awaitReady();
+
+        logger = new Logger(jda.getTextChannelById("718563766232547489"));
 
         remindersManager = new RemindersManager();
 

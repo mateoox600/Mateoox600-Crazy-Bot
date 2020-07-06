@@ -19,8 +19,8 @@ public class BinaryCommand extends Command {
     protected void execute(CommandEvent e) {
         String[] args = e.getMessage().getContentRaw().split("\\s+");
         args = Arrays.copyOfRange(args, 1, args.length);
-        if (args.length > 1) {
-            if (args[0].equalsIgnoreCase("encode") || args[0].equalsIgnoreCase("e")) {
+        if (args.length > 0) {
+            /*if (args[0].equalsIgnoreCase("encode") || args[0].equalsIgnoreCase("e")) {
                 try {
                     StringBuilder output = new StringBuilder();
                     for (char c : String.join(" ", Arrays.copyOfRange(args, 1, args.length)).toLowerCase().toCharArray())
@@ -43,9 +43,10 @@ public class BinaryCommand extends Command {
                 }
             } else {
                 e.getChannel().sendMessage("```Correct usage: .binary <encode/decode> <text/binary>```").queue();
-            }
+            }*/
+            e.getChannel().sendMessage(e.getAuthor().getAsMention() + " Encode or Decode (E/D): \n```" + String.join(" ", args) + "```").queue(msg -> msg.addReaction("\uD83C\uDDEA").queue(emote -> msg.addReaction("\uD83C\uDDE9").queue(emote1 -> MCB.reactionsEventMessage.put(msg.getId(), msg))));
         } else {
-            e.getChannel().sendMessage("```Correct usage: .binary <encode/decode> <text/binary>```").queue();
+            e.getChannel().sendMessage("```Correct usage: .binary <text/binary>```").queue();
         }
     }
 
