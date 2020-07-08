@@ -2,10 +2,7 @@ package fr.mateoox600.mcb;
 
 import com.jagrosh.jdautilities.command.CommandClientBuilder;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
-import fr.mateoox600.mcb.commands.BinaryCommand;
-import fr.mateoox600.mcb.commands.CalcCommand;
-import fr.mateoox600.mcb.commands.PingCommand;
-import fr.mateoox600.mcb.commands.ReminderCommand;
+import fr.mateoox600.mcb.commands.*;
 import fr.mateoox600.mcb.commands.mod.KickCommand;
 import fr.mateoox600.mcb.commands.mod.ReportCommand;
 import fr.mateoox600.mcb.commands.owner.DebugCommand;
@@ -64,6 +61,7 @@ public class MCB {
                 new PingCommand(),
                 new CalcCommand(),
                 new ReminderCommand(),
+                new RemindersCommand(),
                 new EBTowerCommand(),
                 new KickCommand(),
                 new ReportCommand(),

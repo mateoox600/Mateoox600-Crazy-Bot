@@ -61,6 +61,14 @@ public class RemindersManager {
         return "0s";
     }
 
+    public List<Reminder> getAllMemberReminders(Member member){
+        List<Reminder> found = new ArrayList<>();
+        for (Reminder reminder : reminders){
+            if (reminder.getUser().getId().equals(member.getId())) found.add(reminder);
+        }
+        return found;
+    }
+
     public void addReminder(String text, Member member, TextChannel channel, long in, boolean message) {
         reminders.add(new Reminder(in, member.getUser(), channel, text, message));
         try {

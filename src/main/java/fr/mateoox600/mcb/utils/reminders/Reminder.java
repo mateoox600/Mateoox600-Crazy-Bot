@@ -12,13 +12,13 @@ import java.util.TimerTask;
 
 public class Reminder {
 
-    private final User member;
+    private final User user;
     private final TextChannel channel;
     private final String text;
     private final long end;
 
-    public Reminder(long in, User member, TextChannel channel, String text, boolean message) {
-        this.member = member;
+    public Reminder(long in, User user, TextChannel channel, String text, boolean message) {
+        this.user = user;
         this.channel = channel;
         this.text = text;
         if (message) channel.sendMessage(parseMessageTime(in)).queue();
@@ -33,20 +33,68 @@ public class Reminder {
         return new Reminder(Long.parseLong(args[0]) - System.currentTimeMillis(), MCB.jda.getUserById(args[2]), MCB.jda.getTextChannelById(args[3]), args[1], false);
     }
 
+    public static String longTimeToStringTime(long in) {
+        StringBuilder stringBuilder = new StringBuilder();
+        int days = Math.toIntExact(in / 1000 / 60 / 60 / 24);
+        if (days > 0) {
+            if (days > 1) {
+                stringBuilder.append(days).append(" days, ");
+            } else {
+                stringBuilder.append(days).append(" day, ");
+            }
+        }
+        in -= days * 24 * 60 * 60 * 1000;
+        int hours = Math.toIntExact(in / 1000 / 60 / 60);
+        if (hours > 0) {
+            if (hours > 1) {
+                stringBuilder.append(hours).append(" hours, ");
+            } else {
+                stringBuilder.append(hours).append(" hour, ");
+            }
+        }
+        in -= hours * 60 * 60 * 1000;
+        int minutes = Math.toIntExact(in / 1000 / 60);
+        if (minutes > 0) {
+            if (minutes > 1) {
+                stringBuilder.append(minutes).append(" minutes, ");
+            } else {
+                stringBuilder.append(minutes).append(" minute, ");
+            }
+        }
+        in -= minutes * 60 * 1000;
+        int seconds = Math.toIntExact(in / 1000);
+        if (seconds > 0) {
+            if (seconds > 1) {
+                stringBuilder.append(seconds).append(" seconds ");
+            } else {
+                stringBuilder.append(seconds).append(" second ");
+            }
+        }
+        return stringBuilder.toString();
+    }
+
     private MessageEmbed getMessage() {
         EmbedBuilder embedBuilder = new EmbedBuilder();
-        embedBuilder.setAuthor(member.getName(), null, member.getEffectiveAvatarUrl());
-        embedBuilder.setColor(channel.getGuild().getMember(member).getRoles().get(0).getColor());
+        embedBuilder.setAuthor(user.getName(), null, user.getEffectiveAvatarUrl());
+        embedBuilder.setColor(channel.getGuild().getMember(user).getRoles().get(0).getColor());
         embedBuilder.addField("Reminder:", text, false);
         return embedBuilder.build();
     }
 
     public void sendReminder() {
-        channel.sendMessage(member.getAsMention()).queue(msg -> channel.sendMessage(getMessage()).queue());
+        channel.sendMessage(user.getAsMention()).queue(msg -> channel.sendMessage(getMessage()).queue());
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public String getText() {
+        return text;
     }
 
     public String getSaveMsg() {
-        return end + "/" + text + "/" + member.getId() + "/" + channel.getId();
+        return end + "/" + text + "/" + user.getId() + "/" + channel.getId();
     }
 
     private String parseMessageTime(long in) {
@@ -90,6 +138,9 @@ public class Reminder {
         return stringBuilder.toString();
     }
 
+    public long getTime() {
+        return end - System.currentTimeMillis();
+    }
 }
 
 class Task extends TimerTask {
