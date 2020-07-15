@@ -12,7 +12,6 @@ public class StatusCommand extends Command {
     public StatusCommand() {
         this.name = "status";
         this.help = "Bot Owner Command: Change bot status";
-        this.aliases = new String[]{"stats", "stat"};
         this.arguments = "<new status>";
     }
 
@@ -35,7 +34,6 @@ public class StatusCommand extends Command {
                 for (String arg : args) {
                     builder.append(" ").append(arg);
                 }
-                MCB.logger.logStatusChangeNoPerm(e.getMember(), builder.toString());
             }
         } else {
             e.getChannel().sendMessage("```Correct usage: .status <new status>```").queue();

@@ -2,7 +2,6 @@ package fr.mateoox600.mcb.commands.mod;
 
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
-import fr.mateoox600.mcb.MCB;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
 
@@ -30,15 +29,13 @@ public class KickCommand extends Command {
                 if (args.length == 1) {
                     target.getUser().openPrivateChannel().complete().sendMessage("You have been kick from " + e.getGuild().getName()).queue();
                     e.getGuild().kick(target).queue();
-                    e.getChannel().sendMessage("<@" + target.getId() + "> was kick").queue();
-                    MCB.logger.logKick(target, e.getMember(), "None");
+                    e.getChannel().sendMessage(target.getAsMention() + " was kick").queue();
                 } else {
                     StringBuilder reason = new StringBuilder();
                     for (String arg : Arrays.copyOfRange(args, 1, args.length)) reason.append(arg).append(" ");
                     target.getUser().openPrivateChannel().complete().sendMessage("You have been kick from " + e.getGuild().getName() + " for '" + reason.toString() + "'").queue();
                     e.getGuild().kick(target).queue();
-                    e.getChannel().sendMessage("<@" + target.getId() + "> was kick for '" + reason.toString() + "'").queue();
-                    MCB.logger.logKick(target, e.getMember(), reason.toString());
+                    e.getChannel().sendMessage(target.getAsMention() + " was kick for '" + reason.toString() + "'").queue();
                 }
             } else {
                 e.getChannel().sendMessage("```Invalid user, usage: .kick <mention> [reason]```").queue();

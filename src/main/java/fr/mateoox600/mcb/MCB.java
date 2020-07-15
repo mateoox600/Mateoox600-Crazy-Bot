@@ -4,7 +4,7 @@ import com.jagrosh.jdautilities.command.CommandClientBuilder;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import fr.mateoox600.mcb.commands.*;
 import fr.mateoox600.mcb.commands.mod.KickCommand;
-import fr.mateoox600.mcb.commands.mod.ReportCommand;
+import fr.mateoox600.mcb.commands.owner.ReportCommand;
 import fr.mateoox600.mcb.commands.owner.DebugCommand;
 import fr.mateoox600.mcb.commands.owner.SaveCommand;
 import fr.mateoox600.mcb.commands.owner.StatusCommand;
@@ -17,11 +17,11 @@ import fr.mateoox600.mcb.events.BinaryEvent;
 import fr.mateoox600.mcb.events.GetRolesEvents;
 import fr.mateoox600.mcb.events.UserEvents;
 import fr.mateoox600.mcb.utils.Config;
-import fr.mateoox600.mcb.utils.Logger;
 import fr.mateoox600.mcb.utils.reminders.RemindersManager;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.Emote;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
@@ -34,12 +34,13 @@ import java.util.HashMap;
 
 public class MCB {
 
-    public static Logger logger;
     public static EBTower EBTower;
     public static Config config;
     public static RemindersManager remindersManager;
     public static JDA jda;
     public static HashMap<String, Message> reactionsEventMessage = new HashMap<>();
+    public static Emote MCBEmote;
+    public static String[] reactionNumber = new String[]{"\u0030\u20E3","\u0031\u20E3","\u0032\u20E3","\u0033\u20E3","\u0034\u20E3","\u0035\u20E3", "\u0036\u20E3","\u0037\u20E3","\u0038\u20E3","\u0039\u20E3"};
 
     // TODO: 05/07/2020 game guess number with interface 
 
@@ -59,6 +60,7 @@ public class MCB {
 
         client.addCommands(new BinaryCommand(),
                 new PingCommand(),
+                new StatsCommand(),
                 new CalcCommand(),
                 new ReminderCommand(),
                 new RemindersCommand(),
@@ -74,6 +76,7 @@ public class MCB {
                 .setChunkingFilter(ChunkingFilter.ALL)
                 .setMemberCachePolicy(MemberCachePolicy.ALL)
                 .enableIntents(GatewayIntent.GUILD_MEMBERS)
+                .enableIntents(GatewayIntent.GUILD_PRESENCES)
                 .setActivity(Activity.playing("loading..."))
                 .addEventListeners(waiter, client.build());
 
@@ -87,7 +90,7 @@ public class MCB {
 
         jda.awaitReady();
 
-        logger = new Logger(jda.getTextChannelById("718563766232547489"));
+        MCBEmote = jda.getGuildById("713826539698913320").getEmotesByName("MCB", false).get(0);
 
         remindersManager = new RemindersManager();
 

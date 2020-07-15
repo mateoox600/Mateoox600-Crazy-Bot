@@ -61,9 +61,9 @@ public class RemindersManager {
         return "0s";
     }
 
-    public List<Reminder> getAllMemberReminders(Member member){
+    public List<Reminder> getAllMemberReminders(Member member) {
         List<Reminder> found = new ArrayList<>();
-        for (Reminder reminder : reminders){
+        for (Reminder reminder : reminders) {
             if (reminder.getUser().getId().equals(member.getId())) found.add(reminder);
         }
         return found;

@@ -6,7 +6,6 @@ import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import javax.annotation.Nonnull;
-import java.util.Arrays;
 
 public class BinaryEvent extends ListenerAdapter {
 
@@ -17,26 +16,25 @@ public class BinaryEvent extends ListenerAdapter {
         if (message == null) return;
 
         if (message.getContentRaw().contains("Encode or Decode (E/D):")) {
-            if (!e.getUser().getId().equals(message.getContentRaw().split(" ")[0].substring(2, message.getContentRaw().split(" ")[0].length()-1))) return;
+            if (!e.getUser().getId().equals(message.getContentRaw().split(" ")[0].substring(2, message.getContentRaw().split(" ")[0].length() - 1)))
+                return;
             if (e.getReactionEmote().getName().equals("\uD83C\uDDEA")) {
-                String[] args = message.getContentRaw().substring(29+message.getContentRaw().split(" ")[0].length(), message.getContentRaw().length()-3).split("\\s+");
+                String[] args = message.getContentRaw().substring(29 + message.getContentRaw().split(" ")[0].length(), message.getContentRaw().length() - 3).split("\\s+");
                 try {
                     StringBuilder output = new StringBuilder();
                     for (char c : String.join(" ", args).toLowerCase().toCharArray())
                         output.append(Integer.toBinaryString(c)).append(" ");
-                    MCB.logger.logBinConv(e.getMember(), String.join(" ", args), output.toString(), true);
                     message.delete().queue(msg -> e.getChannel().sendMessage("<@" + message.getAuthor().getId() + "> ```" + output.toString() + "```").queue());
                 } catch (Exception error) {
                     error.printStackTrace();
                     e.getChannel().sendMessage("```ERROR: Can't parse those words```").queue();
                 }
-            }else if (e.getReactionEmote().getName().equals("\uD83C\uDDE9")) {
-                String[] args = message.getContentRaw().substring(29+message.getContentRaw().split(" ")[0].length(), message.getContentRaw().length()-3).split("\\s+");
+            } else if (e.getReactionEmote().getName().equals("\uD83C\uDDE9")) {
+                String[] args = message.getContentRaw().substring(29 + message.getContentRaw().split(" ")[0].length(), message.getContentRaw().length() - 3).split("\\s+");
                 try {
                     StringBuilder output = new StringBuilder();
                     for (String str_n : args)
                         output.append((char) Integer.parseInt(str_n, 2));
-                    MCB.logger.logBinConv(e.getMember(), String.join(" ", args), output.toString(), false);
                     message.delete().queue(msg -> e.getChannel().sendMessage("<@" + message.getAuthor().getId() + "> ```" + output.toString() + "```").queue());
                 } catch (Exception error) {
                     e.getChannel().sendMessage("```ERROR: Can't parse those binary numbers```").queue();

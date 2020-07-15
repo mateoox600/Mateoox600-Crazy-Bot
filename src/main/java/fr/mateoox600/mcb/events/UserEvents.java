@@ -12,22 +12,26 @@ public class UserEvents extends ListenerAdapter {
 
     @Override
     public void onGuildMemberJoin(@Nonnull GuildMemberJoinEvent e) {
-        e.getGuild().addRoleToMember(e.getMember(), e.getJDA().getRoleById("714090191182233602")).complete();
-        EmbedBuilder embedBuilder = new EmbedBuilder();
+        if (e.getGuild().getId().equals("713826539698913320")) {
+            e.getGuild().addRoleToMember(e.getMember(), e.getJDA().getRoleById("714090191182233602")).complete();
+            EmbedBuilder embedBuilder = new EmbedBuilder();
 
-        embedBuilder.setTitle(e.getUser().getAsMention(), e.getUser().getEffectiveAvatarUrl());
-        embedBuilder.setColor(Color.GREEN);
+            embedBuilder.setTitle(e.getUser().getName(), e.getUser().getEffectiveAvatarUrl());
+            embedBuilder.setColor(Color.GREEN);
 
-        e.getGuild().getTextChannelById("713827717404950538").sendMessage(embedBuilder.build()).queue();
+            e.getGuild().getTextChannelById("713827717404950538").sendMessage(embedBuilder.build()).queue();
+        }
     }
 
     @Override
     public void onGuildMemberRemove(@Nonnull GuildMemberRemoveEvent e) {
-        EmbedBuilder embedBuilder = new EmbedBuilder();
+        if (e.getGuild().getId().equals("713826539698913320")) {
+            EmbedBuilder embedBuilder = new EmbedBuilder();
 
-        embedBuilder.setTitle(e.getUser().getName(), e.getUser().getEffectiveAvatarUrl());
-        embedBuilder.setColor(Color.RED);
+            embedBuilder.setTitle(e.getUser().getName(), e.getUser().getEffectiveAvatarUrl());
+            embedBuilder.setColor(Color.RED);
 
-        e.getGuild().getTextChannelById("713827717404950538").sendMessage(embedBuilder.build()).queue();
+            e.getGuild().getTextChannelById("713827717404950538").sendMessage(embedBuilder.build()).queue();
+        }
     }
 }

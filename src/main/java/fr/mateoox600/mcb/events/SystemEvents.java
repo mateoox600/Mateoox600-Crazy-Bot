@@ -15,5 +15,4 @@ public class SystemEvents extends ListenerAdapter {
     @Override
     public void onDisconnect(@Nonnull DisconnectEvent e) {
     }
-
 }
