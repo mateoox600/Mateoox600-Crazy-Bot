@@ -9,7 +9,9 @@ import fr.mateoox600.mcb.commands.owner.DebugCommand;
 import fr.mateoox600.mcb.commands.owner.SaveCommand;
 import fr.mateoox600.mcb.commands.owner.StatusCommand;
 import fr.mateoox600.mcb.commands.owner.StopCommand;
+import fr.mateoox600.mcb.enderbot.commands.EBGiftCommand;
 import fr.mateoox600.mcb.enderbot.commands.EBTowerCommand;
+import fr.mateoox600.mcb.enderbot.commands.owner.EnderBotOwnerCommand;
 import fr.mateoox600.mcb.enderbot.events.EBMessageEvents;
 import fr.mateoox600.mcb.enderbot.events.EBMiningEvents;
 import fr.mateoox600.mcb.enderbot.utils.EBTower;
@@ -65,12 +67,14 @@ public class MCB {
                 new ReminderCommand(),
                 new RemindersCommand(),
                 new EBTowerCommand(),
+                new EBGiftCommand(),
                 new KickCommand(),
                 new ReportCommand(),
                 new StopCommand(),
                 new DebugCommand(),
                 new StatusCommand(),
-                new SaveCommand());
+                new SaveCommand(),
+                new EnderBotOwnerCommand());
 
         JDABuilder jdaBuilder = JDABuilder.createDefault(config.getToken())
                 .setChunkingFilter(ChunkingFilter.ALL)

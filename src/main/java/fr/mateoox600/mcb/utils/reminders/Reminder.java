@@ -24,7 +24,7 @@ public class Reminder {
         if (message) channel.sendMessage(parseMessageTime(in)).queue();
         Timer timer = new Timer();
         end = in + System.currentTimeMillis();
-        if (in <= 0) timer.schedule(new Task(this), new Date(System.currentTimeMillis() + 1));
+        if (in <= 10) timer.schedule(new Task(this), new Date(System.currentTimeMillis() + 10));
         else timer.schedule(new Task(this), new Date(in + System.currentTimeMillis()));
     }
 

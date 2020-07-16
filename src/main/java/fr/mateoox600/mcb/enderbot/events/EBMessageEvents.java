@@ -177,17 +177,6 @@ public class EBMessageEvents extends ListenerAdapter {
                             break;
                         }
                     }
-
-                    // check if the message is a vote already did message
-                } else if (e.getMessage().getContentRaw().contains("Vous pourrez voter à nouveau dans") || e.getMessage().getContentRaw().startsWith("You will be able to vote again in")) {
-                    MessageHistory messageHistory = e.getChannel().getHistoryBefore(e.getMessage(), 10).complete();
-                    for (Message message : messageHistory.getRetrievedHistory()) {
-                        if (message.getContentRaw().startsWith(">vote") || message.getContentRaw().startsWith(">vote")) {
-                            MCB.remindersManager.addReminder("EnderBot Vote", message.getMember(), e.getChannel(), RemindersManager.parseReminderTime(e.getMessage().getContentRaw().split(" ")[e.getMessage().getContentRaw().split(" ").length-1]), false);
-                            message.addReaction(MCB.MCBEmote).queue();
-                            break;
-                        }
-                    }
                 }
             }
         }
