@@ -70,7 +70,19 @@ public class RemindersManager {
     }
 
     public void addReminder(String text, Member member, TextChannel channel, long in, boolean message) {
-        reminders.add(new Reminder(in, member.getUser(), channel, text, message));
+        Reminder reminder = new Reminder(in, member.getUser(), channel, text, message);
+        reminders.add(reminder);
+        reminder.start();
+        try {
+            save();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addReminder(Reminder reminder){
+        reminders.add(reminder);
+        reminder.start();
         try {
             save();
         } catch (IOException e) {
@@ -90,7 +102,8 @@ public class RemindersManager {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(remindersSaveFile));
         String line;
         while ((line = bufferedReader.readLine()) != null) {
-            reminders.add(Reminder.getReminderBySaveMsg(line));
+            Reminder reminder = Reminder.getReminderBySaveMsg(line);
+            addReminder(reminder);
         }
         bufferedReader.close();
     }

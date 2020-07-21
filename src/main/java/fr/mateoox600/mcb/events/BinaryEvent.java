@@ -24,7 +24,7 @@ public class BinaryEvent extends ListenerAdapter {
                     StringBuilder output = new StringBuilder();
                     for (char c : String.join(" ", args).toLowerCase().toCharArray())
                         output.append(Integer.toBinaryString(c)).append(" ");
-                    message.delete().queue(msg -> e.getChannel().sendMessage("<@" + message.getAuthor().getId() + "> ```" + output.toString() + "```").queue());
+                    message.delete().queue(msg -> e.getChannel().sendMessage("<@" + message.getAuthor().getId() + "> ```" + output.toString() + "```").queue(msg1 -> MCB.reactionsEventMessage.remove(e.getMessageId())));
                 } catch (Exception error) {
                     error.printStackTrace();
                     e.getChannel().sendMessage("```ERROR: Can't parse those words```").queue();
@@ -35,7 +35,7 @@ public class BinaryEvent extends ListenerAdapter {
                     StringBuilder output = new StringBuilder();
                     for (String str_n : args)
                         output.append((char) Integer.parseInt(str_n, 2));
-                    message.delete().queue(msg -> e.getChannel().sendMessage("<@" + message.getAuthor().getId() + "> ```" + output.toString() + "```").queue());
+                    message.delete().queue(msg -> e.getChannel().sendMessage("<@" + message.getAuthor().getId() + "> ```" + output.toString() + "```").queue(msg1 -> MCB.reactionsEventMessage.remove(e.getMessageId())));
                 } catch (Exception error) {
                     e.getChannel().sendMessage("```ERROR: Can't parse those binary numbers```").queue();
                 }

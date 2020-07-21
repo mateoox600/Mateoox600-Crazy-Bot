@@ -11,6 +11,7 @@ import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import javax.annotation.Nonnull;
+import java.util.Timer;
 
 public class EBMiningEvents extends ListenerAdapter {
 
@@ -63,7 +64,7 @@ public class EBMiningEvents extends ListenerAdapter {
             for (String ress : miningField.getValue().split("\n"))
                 trade.append(" ").append(ress.split(":")[1]).append(" ").append(Long.valueOf(String.join("", ress.split(":")[3].split(" "))));
             trade.append(" @");
-            e.getChannel().sendMessage("```" + trade.toString() + "```").queue();
+            e.getChannel().sendMessage("```" + trade.toString() + "```").queue(msg -> MCB.reactionsEventMessage.remove(e.getMessageId()));
 
         }
 

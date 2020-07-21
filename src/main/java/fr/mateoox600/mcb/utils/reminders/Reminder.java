@@ -15,22 +15,27 @@ public class Reminder {
     private final User user;
     private final TextChannel channel;
     private final String text;
-    private final long end;
+    private final long end, in;
 
     public Reminder(long in, User user, TextChannel channel, String text, boolean message) {
         this.user = user;
         this.channel = channel;
         this.text = text;
+        this.in = in;
+        this.end = in + System.currentTimeMillis();
         if (message) channel.sendMessage(parseMessageTime(in)).queue();
-        Timer timer = new Timer();
-        end = in + System.currentTimeMillis();
-        if (in <= 10) timer.schedule(new Task(this), new Date(System.currentTimeMillis() + 10));
-        else timer.schedule(new Task(this), new Date(in + System.currentTimeMillis()));
     }
 
     public static Reminder getReminderBySaveMsg(String msg) {
         String[] args = msg.split("/");
         return new Reminder(Long.parseLong(args[0]) - System.currentTimeMillis(), MCB.jda.getUserById(args[2]), MCB.jda.getTextChannelById(args[3]), args[1], false);
+    }
+
+    public void start(){
+        Timer timer = new Timer();
+        if (in <= 500) {
+            timer.schedule(new Task(this), new Date(5000 + System.currentTimeMillis()));
+        } else timer.schedule(new Task(this), new Date(in + System.currentTimeMillis()));
     }
 
     public static String longTimeToStringTime(long in) {
