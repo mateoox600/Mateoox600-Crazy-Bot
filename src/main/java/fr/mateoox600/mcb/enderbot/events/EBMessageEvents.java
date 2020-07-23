@@ -10,7 +10,6 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;
-import java.util.List;
 
 public class EBMessageEvents extends ListenerAdapter {
 
@@ -28,9 +27,11 @@ public class EBMessageEvents extends ListenerAdapter {
                     MessageHistory messageHistory = e.getChannel().getHistoryBefore(e.getMessage(), 10).complete();
                     for (Message message : messageHistory.getRetrievedHistory()) {
                         if (message.getContentRaw().startsWith(">da") || message.getContentRaw().startsWith(">day") || message.getContentRaw().startsWith(">daily")) {
-                            MCB.remindersManager.addReminder("EnderBot Daily", message.getMember(), e.getChannel(), RemindersManager.parseReminderTime("1d"), false);
-                            message.addReaction(MCB.MCBEmote).queue();
-                            break;
+                            if (!message.getReactions().contains(MCB.MCBEmote)) {
+                                MCB.remindersManager.addReminder("EnderBot Daily", message.getMember(), e.getChannel(), RemindersManager.parseReminderTime("1d"), false);
+                                message.addReaction(MCB.MCBEmote).queue();
+                                break;
+                            }
                         }
                     }
 
@@ -40,9 +41,11 @@ public class EBMessageEvents extends ListenerAdapter {
                     for (Message message : messageHistory.getRetrievedHistory()) {
                         if ((message.getContentRaw().startsWith(">port") || message.getContentRaw().startsWith(">por")) &&
                                 (message.getContentRaw().endsWith("claim") || message.getContentRaw().endsWith("c"))) {
-                            MCB.remindersManager.addReminder("EnderBot Port", message.getMember(), e.getChannel(), RemindersManager.parseReminderTime("1d"), false);
-                            message.addReaction(MCB.MCBEmote).queue();
-                            break;
+                            if (!message.getReactions().contains(MCB.MCBEmote)) {
+                                MCB.remindersManager.addReminder("EnderBot Port", message.getMember(), e.getChannel(), RemindersManager.parseReminderTime("1d"), false);
+                                message.addReaction(MCB.MCBEmote).queue();
+                                break;
+                            }
                         }
                     }
                 }
@@ -76,9 +79,11 @@ public class EBMessageEvents extends ListenerAdapter {
                     MessageHistory messageHistory = e.getChannel().getHistoryBefore(e.getMessage(), 10).complete();
                     for (Message message : messageHistory.getRetrievedHistory()) {
                         if (message.getContentRaw().startsWith(">hr") || message.getContentRaw().startsWith(">hour") || message.getContentRaw().startsWith(">hourly")) {
-                            MCB.remindersManager.addReminder("EnderBot Hr", message.getMember(), e.getChannel(), RemindersManager.parseReminderTime("1h"), false);
-                            message.addReaction(MCB.MCBEmote).queue();
-                            break;
+                            if (!message.getReactions().contains(MCB.MCBEmote)) {
+                                MCB.remindersManager.addReminder("EnderBot Hr", message.getMember(), e.getChannel(), RemindersManager.parseReminderTime("1h"), false);
+                                message.addReaction(MCB.MCBEmote).queue();
+                                break;
+                            }
                         }
                     }
 
@@ -88,9 +93,11 @@ public class EBMessageEvents extends ListenerAdapter {
                     for (Message message : messageHistory.getRetrievedHistory()) {
                         if ((message.getContentRaw().startsWith(">g") || message.getContentRaw().startsWith(">gen") || message.getContentRaw().startsWith(">generator")) &&
                                 (message.getContentRaw().endsWith("s") || message.getContentRaw().endsWith("start"))) {
-                            MCB.remindersManager.addReminder("EnderBot Gen", message.getMember(), e.getChannel(), RemindersManager.parseReminderTime("4h"), false);
-                            message.addReaction(MCB.MCBEmote).queue();
-                            break;
+                            if (!message.getReactions().contains(MCB.MCBEmote)) {
+                                MCB.remindersManager.addReminder("EnderBot Generator", message.getMember(), e.getChannel(), RemindersManager.parseReminderTime("4h"), false);
+                                message.addReaction(MCB.MCBEmote).queue();
+                                break;
+                            }
                         }
                     }
 
@@ -100,9 +107,11 @@ public class EBMessageEvents extends ListenerAdapter {
                     for (Message message : messageHistory.getRetrievedHistory()) {
                         if ((message.getContentRaw().startsWith(">drill") || message.getContentRaw().startsWith(">dri") || message.getContentRaw().startsWith(">dril")) &&
                                 (message.getContentRaw().endsWith("claim") || message.getContentRaw().endsWith("c"))) {
-                            MCB.remindersManager.addReminder("EnderBot Drill", message.getMember(), e.getChannel(), RemindersManager.parseReminderTime("1d"), false);
-                            message.addReaction(MCB.MCBEmote).queue();
-                            break;
+                            if (!message.getReactions().contains(MCB.MCBEmote)) {
+                                MCB.remindersManager.addReminder("EnderBot Drill", message.getMember(), e.getChannel(), RemindersManager.parseReminderTime("1d"), false);
+                                message.addReaction(MCB.MCBEmote).queue();
+                                break;
+                            }
                         }
                     }
                 }
@@ -125,9 +134,11 @@ public class EBMessageEvents extends ListenerAdapter {
                     MessageHistory messageHistory = e.getChannel().getHistoryBefore(e.getMessage(), 10).complete();
                     for (Message message : messageHistory.getRetrievedHistory()) {
                         if (message.getContentRaw().startsWith(">fish") || message.getContentRaw().startsWith(">fi")) {
-                            MCB.remindersManager.addReminder("EnderBot Fish", message.getMember(), e.getChannel(), RemindersManager.parseReminderTime(time), false);
-                            message.addReaction(MCB.MCBEmote).queue();
-                            break;
+                            if (!message.getReactions().contains(MCB.MCBEmote)) {
+                                MCB.remindersManager.addReminder("EnderBot Fish", message.getMember(), e.getChannel(), RemindersManager.parseReminderTime(time), false);
+                                message.addReaction(MCB.MCBEmote).queue();
+                                break;
+                            }
                         }
                     }
                 }
@@ -137,9 +148,11 @@ public class EBMessageEvents extends ListenerAdapter {
                     MessageHistory messageHistory = e.getChannel().getHistoryBefore(e.getMessage(), 10).complete();
                     for (Message message : messageHistory.getRetrievedHistory()) {
                         if (message.getContentRaw().startsWith(">cau") || message.getContentRaw().startsWith(">cauldron")) {
-                            MCB.remindersManager.addReminder("EnderBot Cauldron", message.getMember(), e.getChannel(), RemindersManager.parseReminderTime(e.getMessage().getContentRaw().split(" ")[e.getMessage().getContentRaw().split(" ").length - 1]), false);
-                            message.addReaction(MCB.MCBEmote).queue();
-                            break;
+                            if (!message.getReactions().contains(MCB.MCBEmote)) {
+                                MCB.remindersManager.addReminder("EnderBot Cauldron", message.getMember(), e.getChannel(), RemindersManager.parseReminderTime(e.getMessage().getContentRaw().split(" ")[e.getMessage().getContentRaw().split(" ").length - 1]), false);
+                                message.addReaction(MCB.MCBEmote).queue();
+                                break;
+                            }
                         }
                     }
 
@@ -148,9 +161,11 @@ public class EBMessageEvents extends ListenerAdapter {
                     MessageHistory messageHistory = e.getChannel().getHistoryBefore(e.getMessage(), 10).complete();
                     for (Message message : messageHistory.getRetrievedHistory()) {
                         if (message.getContentRaw().startsWith(">g") || message.getContentRaw().startsWith(">gen") || message.getContentRaw().startsWith(">generator")) {
-                            MCB.remindersManager.addReminder("EnderBot Generator Repair", message.getMember(), e.getChannel(), RemindersManager.parseReminderTime("1d"), false);
-                            message.addReaction(MCB.MCBEmote).queue();
-                            break;
+                            if (!message.getReactions().contains(MCB.MCBEmote)) {
+                                MCB.remindersManager.addReminder("EnderBot Generator Repair", message.getMember(), e.getChannel(), RemindersManager.parseReminderTime("1d"), false);
+                                message.addReaction(MCB.MCBEmote).queue();
+                                break;
+                            }
                         }
                     }
 
@@ -160,9 +175,11 @@ public class EBMessageEvents extends ListenerAdapter {
                     for (Message message : messageHistory.getRetrievedHistory()) {
                         if ((message.getContentRaw().startsWith(">vi") || message.getContentRaw().startsWith(">village")) &&
                                 (message.getContentRaw().endsWith("claim") || message.getContentRaw().endsWith("c"))) {
-                            MCB.remindersManager.addReminder("EnderBot Village", message.getMember(), e.getChannel(), RemindersManager.parseReminderTime("1d"), false);
-                            message.addReaction(MCB.MCBEmote).queue();
-                            break;
+                            if (!message.getReactions().contains(MCB.MCBEmote)) {
+                                MCB.remindersManager.addReminder("EnderBot Village", message.getMember(), e.getChannel(), RemindersManager.parseReminderTime("1d"), false);
+                                message.addReaction(MCB.MCBEmote).queue();
+                                break;
+                            }
                         }
                     }
 
@@ -172,9 +189,11 @@ public class EBMessageEvents extends ListenerAdapter {
                     for (Message message : messageHistory.getRetrievedHistory()) {
                         if ((message.getContentRaw().startsWith(">rep") || message.getContentRaw().startsWith(">reputation")) &&
                                 message.getContentRaw().contains(e.getMessage().getContentRaw().split(" ")[e.getMessage().getContentRaw().split(" ").length - 2])) {
-                            MCB.remindersManager.addReminder("EnderBot Reputation", message.getMember(), e.getChannel(), RemindersManager.parseReminderTime("1d"), false);
-                            message.addReaction(MCB.MCBEmote).queue();
-                            break;
+                            if (!message.getReactions().contains(MCB.MCBEmote)) {
+                                MCB.remindersManager.addReminder("EnderBot Reputation", message.getMember(), e.getChannel(), RemindersManager.parseReminderTime("1d"), false);
+                                message.addReaction(MCB.MCBEmote).queue();
+                                break;
+                            }
                         }
                     }
                 }
@@ -206,7 +225,7 @@ public class EBMessageEvents extends ListenerAdapter {
         }
     }
 
-    public boolean checkMessage(Message message, String[] contains, String time, String name, String[] prefix, String[] suffix){
+    public boolean checkMessage(Message message, String[] contains, String time, String name, String[] prefix, String[] suffix) {
         if (stringContainsItemFromList(message.getContentRaw(), contains)) {
             MessageHistory messageHistory = message.getChannel().getHistoryBefore(message, 10).complete();
             for (Message Hmessage : messageHistory.getRetrievedHistory()) {

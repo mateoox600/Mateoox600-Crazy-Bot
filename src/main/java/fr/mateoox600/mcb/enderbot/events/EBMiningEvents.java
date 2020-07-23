@@ -58,7 +58,7 @@ public class EBMiningEvents extends ListenerAdapter {
 
         // TODO: 10/07/2020 add taxe
 
-        if (!e.getReactionEmote().getName().equals(MCB.reactionNumber[0])) {
+        if (e.getReactionEmote().getName().equals(MCB.reactionNumber[0])) {
 
             StringBuilder trade = new StringBuilder(">trade");
             for (String ress : miningField.getValue().split("\n"))

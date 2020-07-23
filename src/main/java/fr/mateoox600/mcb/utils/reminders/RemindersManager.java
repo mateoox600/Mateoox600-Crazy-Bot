@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RemindersManager {
 
@@ -20,13 +22,37 @@ public class RemindersManager {
         remindersSaveFile = new File(MCB.config.getDataFolder(), "reminders.txt");
         if (!remindersSaveFile.exists()) remindersSaveFile.createNewFile();
         load();
-        save();
         Timer timer = new Timer();
         timer.schedule(new RMManagerTask(), 1000 * 30, 1000 * 30);
     }
 
     public static long parseReminderTime(String arg) {
-        long totalTime = 0;
+        int days = 0, hours = 0, minutes = 0, seconds = 0;
+
+        Matcher mat = Pattern.compile("\\d{1,}d").matcher(arg);
+        if (mat.find()) {
+            days = Integer.parseInt(mat.group().substring(0, mat.group().length() - 1));
+        }
+
+        mat = Pattern.compile("\\d{1,}h").matcher(arg);
+        if (mat.find()) {
+            hours = Integer.parseInt(mat.group().substring(0, mat.group().length() - 1));
+        }
+
+        mat = Pattern.compile("\\d{1,}m").matcher(arg);
+        if (mat.find()) {
+            minutes = Integer.parseInt(mat.group().substring(0, mat.group().length() - 1));
+        }
+
+        mat = Pattern.compile("\\d{1,}s").matcher(arg);
+        if (mat.find()) seconds = Integer.parseInt(mat.group().substring(0, mat.group().length() - 1));
+
+        long totalHours = (days * 24) + hours;
+        long totalMinutes = (totalHours * 60) + minutes;
+        long totalSeconds = (totalMinutes * 60) + seconds;
+
+        return totalSeconds * 1000;
+        /*long totalTime = 0;
 
         StringBuilder loopingOn = new StringBuilder();
         for (char arg_char : arg.toLowerCase().toCharArray()) {
@@ -45,7 +71,7 @@ public class RemindersManager {
             } else loopingOn.append(arg_char);
         }
 
-        return totalTime;
+        return totalTime;*/
     }
 
     public static String findTimeIn(String message) {
@@ -73,14 +99,9 @@ public class RemindersManager {
         Reminder reminder = new Reminder(in, member.getUser(), channel, text, message);
         reminders.add(reminder);
         reminder.start();
-        try {
-            save();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
-    public void addReminder(Reminder reminder){
+    public void addReminder(Reminder reminder) {
         reminders.add(reminder);
         reminder.start();
         try {

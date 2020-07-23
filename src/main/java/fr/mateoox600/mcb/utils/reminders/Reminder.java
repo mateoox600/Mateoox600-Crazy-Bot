@@ -33,49 +33,26 @@ public class Reminder {
 
     public void start(){
         Timer timer = new Timer();
-        if (in <= 500) {
+        if (in <= 5000) {
             timer.schedule(new Task(this), new Date(5000 + System.currentTimeMillis()));
         } else timer.schedule(new Task(this), new Date(in + System.currentTimeMillis()));
     }
 
     public static String longTimeToStringTime(long in) {
-        StringBuilder stringBuilder = new StringBuilder();
-        int days = Math.toIntExact(in / 1000 / 60 / 60 / 24);
-        if (days > 0) {
-            if (days > 1) {
-                stringBuilder.append(days).append(" days, ");
-            } else {
-                stringBuilder.append(days).append(" day, ");
-            }
-        }
-        in -= days * 24 * 60 * 60 * 1000;
-        int hours = Math.toIntExact(in / 1000 / 60 / 60);
-        if (hours > 0) {
-            if (hours > 1) {
-                stringBuilder.append(hours).append(" hours, ");
-            } else {
-                stringBuilder.append(hours).append(" hour, ");
-            }
-        }
-        in -= hours * 60 * 60 * 1000;
-        int minutes = Math.toIntExact(in / 1000 / 60);
-        if (minutes > 0) {
-            if (minutes > 1) {
-                stringBuilder.append(minutes).append(" minutes, ");
-            } else {
-                stringBuilder.append(minutes).append(" minute, ");
-            }
-        }
-        in -= minutes * 60 * 1000;
-        int seconds = Math.toIntExact(in / 1000);
-        if (seconds > 0) {
-            if (seconds > 1) {
-                stringBuilder.append(seconds).append(" seconds ");
-            } else {
-                stringBuilder.append(seconds).append(" second ");
-            }
-        }
-        return stringBuilder.toString();
+        String string = "";
+
+        in /= 1000; int days = (int) (in / 86400);
+        in -= days * 86400; int hours = (int) (in / 3600);
+        in -= hours * 3600; int minutes = (int) (in / 60);
+        in -= minutes * 60;  int seconds = (int) in;
+
+        if (days > 0) string += days + " day" + (days > 1 ? "s" : "") + ", ";
+        if (hours > 0) string += hours + " hour" + (hours > 1 ? "s" : "") + ", ";
+        if (minutes > 0) string += minutes + " minute" + (minutes > 1 ? "s" : "") + ", ";
+        if (seconds > 0) string += seconds + " second" + (seconds > 1 ? "s" : "") + ", ";
+
+        if(string.length() > 0) string = string.substring(0, string.length() - 2);
+        return string;
     }
 
     private MessageEmbed getMessage() {
@@ -103,7 +80,7 @@ public class Reminder {
     }
 
     private String parseMessageTime(long in) {
-        return "Set a reminder in " + Reminder.longTimeToStringTime(in) + "from now";
+        return "Set a reminder in " + Reminder.longTimeToStringTime(in) + " from now";
     }
 
     public long getTime() {
