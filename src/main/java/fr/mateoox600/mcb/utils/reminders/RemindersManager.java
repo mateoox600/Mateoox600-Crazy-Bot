@@ -30,20 +30,11 @@ public class RemindersManager {
         int days = 0, hours = 0, minutes = 0, seconds = 0;
 
         Matcher mat = Pattern.compile("\\d{1,}d").matcher(arg);
-        if (mat.find()) {
-            days = Integer.parseInt(mat.group().substring(0, mat.group().length() - 1));
-        }
-
+        if (mat.find()) days = Integer.parseInt(mat.group().substring(0, mat.group().length() - 1));
         mat = Pattern.compile("\\d{1,}h").matcher(arg);
-        if (mat.find()) {
-            hours = Integer.parseInt(mat.group().substring(0, mat.group().length() - 1));
-        }
-
+        if (mat.find()) hours = Integer.parseInt(mat.group().substring(0, mat.group().length() - 1));
         mat = Pattern.compile("\\d{1,}m").matcher(arg);
-        if (mat.find()) {
-            minutes = Integer.parseInt(mat.group().substring(0, mat.group().length() - 1));
-        }
-
+        if (mat.find()) minutes = Integer.parseInt(mat.group().substring(0, mat.group().length() - 1));
         mat = Pattern.compile("\\d{1,}s").matcher(arg);
         if (mat.find()) seconds = Integer.parseInt(mat.group().substring(0, mat.group().length() - 1));
 
@@ -104,11 +95,6 @@ public class RemindersManager {
     public void addReminder(Reminder reminder) {
         reminders.add(reminder);
         reminder.start();
-        try {
-            save();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void save() throws IOException {

@@ -16,6 +16,7 @@ public class Reminder {
     private final TextChannel channel;
     private final String text;
     private final long end, in;
+    public Timer timer;
 
     public Reminder(long in, User user, TextChannel channel, String text, boolean message) {
         this.user = user;
@@ -32,9 +33,9 @@ public class Reminder {
     }
 
     public void start(){
-        Timer timer = new Timer();
-        if (in <= 5000) {
-            timer.schedule(new Task(this), new Date(5000 + System.currentTimeMillis()));
+        timer = new Timer();
+        if (in <= 10*1000) {
+            timer.schedule(new Task(this), new Date(10*1000 + System.currentTimeMillis()));
         } else timer.schedule(new Task(this), new Date(in + System.currentTimeMillis()));
     }
 

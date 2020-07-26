@@ -42,8 +42,6 @@ public class MCB {
     public static Emote MCBEmote;
     public static String[] reactionNumber = new String[]{"\u0030\u20E3","\u0031\u20E3","\u0032\u20E3","\u0033\u20E3","\u0034\u20E3","\u0035\u20E3", "\u0036\u20E3","\u0037\u20E3","\u0038\u20E3","\u0039\u20E3"};
 
-    // TODO: 05/07/2020 game guess number with interface
-
     public static void main(String[] args) throws LoginException, InterruptedException, URISyntaxException, IOException {
 
         config = new Config("config.json");
@@ -56,7 +54,7 @@ public class MCB {
 
         CommandClientBuilder client = new CommandClientBuilder();
 
-        client.useDefaultGame().setOwnerId(config.getOwnerId()).setPrefix(config.getPrefix());
+        client.useDefaultGame().setOwnerId(config.getOwnerId()).setPrefix(config.getPrefix()).setActivity(Activity.playing("loading..."));
 
         // TODO: 19/07/2020 do .lockdown command 
 
@@ -66,6 +64,7 @@ public class MCB {
                 new CalcCommand(),
                 new ReminderCommand(),
                 new RemindersCommand(),
+                new DeleteReminderCommand(),
                 new EBTowerCommand(),
                 new EBGiftCommand(),
                 new KickCommand(),
@@ -74,6 +73,7 @@ public class MCB {
                 new DebugCommand(),
                 new StatusCommand(),
                 new SaveCommand(),
+                new SayCommand(),
                 new EnderBotOwnerCommand()/*,
                 new GuildDestructCommand(),
                 new SpamCommand()*/);
@@ -83,7 +83,6 @@ public class MCB {
                 .setMemberCachePolicy(MemberCachePolicy.ALL)
                 .enableIntents(GatewayIntent.GUILD_MEMBERS)
                 .enableIntents(GatewayIntent.GUILD_PRESENCES)
-                .setActivity(Activity.playing("loading..."))
                 .addEventListeners(waiter, client.build());
 
         jdaBuilder.addEventListeners(new UserEvents(),
@@ -100,9 +99,9 @@ public class MCB {
 
         remindersManager = new RemindersManager();
 
-        Timer timer = new Timer();
+        /*Timer timer = new Timer();
 
-        timer.schedule(new ReactionsEventsMessagesClean(), 1000*120, 1000*120);
+        timer.schedule(new ReactionsEventsMessagesClean(), 1000*120, 1000*120);*/
 
         jda.getPresence().setActivity(Activity.playing(config.getStatus()));
 
