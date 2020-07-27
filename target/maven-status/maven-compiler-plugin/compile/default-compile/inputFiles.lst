@@ -1,8 +1,11 @@
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\owner\SayCommand.java
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\MCB.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\manager\CommandEvent.java
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\owner\StatusCommand.java
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\enderbot\commands\EBTowerCommand.java
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\mod\KickCommand.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\manager\CommandExecutor.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\manager\CommandBuilder.java
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\utils\reminders\RemindersManager.java
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\CalcCommand.java
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\enderbot\events\EBMessageEvents.java
@@ -15,6 +18,7 @@ H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\PingCommand.java
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\enderbot\events\EBMiningEvents.java
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\owner\SaveCommand.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\manager\Command.java
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\events\UserEvents.java
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\BinaryCommand.java
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\RemindersCommand.java

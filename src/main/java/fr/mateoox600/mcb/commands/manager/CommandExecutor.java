@@ -1,5 +1,6 @@
 package fr.mateoox600.mcb.commands.manager;
 
+import net.dv8tion.jda.api.entities.ChannelType;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -18,6 +19,7 @@ public class CommandExecutor extends ListenerAdapter {
     public void onMessageReceived(@Nonnull MessageReceivedEvent e) {
         String[] args = e.getMessage().getContentRaw().split("\\s+");
         if (!args[0].startsWith(commandBuilder.prefix)) return;
+        if (e.getChannelType() == ChannelType.PRIVATE) return;
         if (args[0].substring(commandBuilder.prefix.length()).equalsIgnoreCase("help")){
             StringBuilder stringBuilder = new StringBuilder("**Mateoox600 Crazy Bot** commands: \n");
             for (Command command : commandBuilder.commands){

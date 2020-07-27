@@ -51,8 +51,6 @@ public class MCB {
 
         CommandBuilder client = new CommandBuilder(config.getPrefix());
 
-        // TODO: 19/07/2020 do .lockdown command 
-
         client.addCommands(new BinaryCommand(),
                 new PingCommand(),
                 new StatsCommand(),

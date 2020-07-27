@@ -2,10 +2,7 @@ package fr.mateoox600.mcb.utils;
 
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 
@@ -46,6 +43,7 @@ public class Config {
 
     private final JSONObject config;
     private final File dataFolder;
+    private final String token;
     private String status;
 
     public Config(String ressourcesPath) throws IOException, URISyntaxException {
@@ -60,6 +58,9 @@ public class Config {
         status = config.getString("status_prefix") + config.getString("status_message");
         String path = getClass().getProtectionDomain().getCodeSource().getLocation().getPath().replace("%20", " ");
         dataFolder = new File(path.substring(0, path.length()-(path.split("/")[path.split("/").length-1].length()+1)) + "/data");
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(dataFolder, "token.txt")));
+        token = bufferedReader.readLine();
+        bufferedReader.close();
     }
 
     public String getPrefix() {
@@ -67,7 +68,7 @@ public class Config {
     }
 
     public String getToken() {
-        return config.getString("token");
+        return token;
     }
 
     public String getOwnerId() {
