@@ -58,7 +58,8 @@ public class Config {
         }
         config = new JSONObject(jsonFile.toString());
         status = config.getString("status_prefix") + config.getString("status_message");
-        dataFolder = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath().replace("%20", " ") + "/data");
+        String path = getClass().getProtectionDomain().getCodeSource().getLocation().getPath().replace("%20", " ");
+        dataFolder = new File(path.substring(0, path.length()-(path.split("/")[path.split("/").length-1].length()+1)) + "/data");
     }
 
     public String getPrefix() {

@@ -1,8 +1,8 @@
 package fr.mateoox600.mcb.commands;
 
-import com.jagrosh.jdautilities.command.Command;
-import com.jagrosh.jdautilities.command.CommandEvent;
 import fr.mateoox600.mcb.MCB;
+import fr.mateoox600.mcb.commands.manager.Command;
+import fr.mateoox600.mcb.commands.manager.CommandEvent;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -28,7 +28,8 @@ public class StatsCommand extends Command {
             for (Member user : g.getMembers()) {
                 if (!user.getUser().isBot() && !alreadyLooped.contains(user.getId())) {
                     alreadyLooped.add(user.getId());
-                    if (user.getOnlineStatus() == OnlineStatus.ONLINE || user.getOnlineStatus() == OnlineStatus.DO_NOT_DISTURB) onlineUsers++;
+                    if (user.getOnlineStatus() == OnlineStatus.ONLINE || user.getOnlineStatus() == OnlineStatus.DO_NOT_DISTURB)
+                        onlineUsers++;
                     else offlineUsers++;
                 }
             }

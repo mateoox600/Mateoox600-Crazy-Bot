@@ -1,7 +1,7 @@
 package fr.mateoox600.mcb.commands.mod;
 
-import com.jagrosh.jdautilities.command.Command;
-import com.jagrosh.jdautilities.command.CommandEvent;
+import fr.mateoox600.mcb.commands.manager.Command;
+import fr.mateoox600.mcb.commands.manager.CommandEvent;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
 

@@ -1,8 +1,8 @@
 package fr.mateoox600.mcb.commands.owner;
 
-import com.jagrosh.jdautilities.command.Command;
-import com.jagrosh.jdautilities.command.CommandEvent;
 import fr.mateoox600.mcb.MCB;
+import fr.mateoox600.mcb.commands.manager.Command;
+import fr.mateoox600.mcb.commands.manager.CommandEvent;
 
 import java.io.IOException;
 import java.util.Arrays;

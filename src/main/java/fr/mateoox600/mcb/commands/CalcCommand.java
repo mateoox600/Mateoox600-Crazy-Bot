@@ -1,7 +1,7 @@
 package fr.mateoox600.mcb.commands;
 
-import com.jagrosh.jdautilities.command.Command;
-import com.jagrosh.jdautilities.command.CommandEvent;
+import fr.mateoox600.mcb.commands.manager.Command;
+import fr.mateoox600.mcb.commands.manager.CommandEvent;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;

@@ -1,16 +1,31 @@
-H:\Mods\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\Config.java
-H:\Mods\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\CalcCommand.java
-H:\Mods\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\MCB.java
-H:\Mods\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\PingCommand.java
-H:\Mods\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\KickCommand.java
-H:\Mods\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\events\SystemEvents.java
-H:\Mods\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\events\GetRolesEvents.java
-H:\Mods\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\ReportCommand.java
-H:\Mods\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\StatusCommand.java
-H:\Mods\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\utils\Logger.java
-H:\Mods\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\events\UserEvents.java
-H:\Mods\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\events\EnderBotMiningEvents.java
-H:\Mods\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\BinaryCommand.java
-H:\Mods\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\events\BinaryEvent.java
-H:\Mods\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\enderbot\commands\EnderBotTowerCommand.java
-H:\Mods\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\enderbot\utils\EnderBotTower.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\owner\SayCommand.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\MCB.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\owner\StatusCommand.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\enderbot\commands\EBTowerCommand.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\mod\KickCommand.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\utils\reminders\RemindersManager.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\CalcCommand.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\enderbot\events\EBMessageEvents.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\enderbot\commands\owner\EnderBotOwnerCommand.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\events\SystemEvents.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\ReminderCommand.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\owner\GuildDestructCommand.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\owner\DebugCommand.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\owner\ReportCommand.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\PingCommand.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\enderbot\events\EBMiningEvents.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\owner\SaveCommand.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\events\UserEvents.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\BinaryCommand.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\RemindersCommand.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\owner\LeaveCommand.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\StatsCommand.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\owner\StopCommand.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\events\BinaryEvent.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\owner\SpamCommand.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\enderbot\utils\EBTower.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\utils\Config.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\enderbot\commands\EBGiftCommand.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\events\GetRolesEvents.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\DeleteReminderCommand.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\utils\reminders\Reminder.java

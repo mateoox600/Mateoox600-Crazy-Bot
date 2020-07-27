@@ -1,8 +1,7 @@
 package fr.mateoox600.mcb;
 
-import com.jagrosh.jdautilities.command.CommandClientBuilder;
-import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import fr.mateoox600.mcb.commands.*;
+import fr.mateoox600.mcb.commands.manager.CommandBuilder;
 import fr.mateoox600.mcb.commands.mod.KickCommand;
 import fr.mateoox600.mcb.commands.owner.*;
 import fr.mateoox600.mcb.enderbot.commands.EBGiftCommand;
@@ -50,11 +49,7 @@ public class MCB {
 
         EBTower = new EBTower();
 
-        EventWaiter waiter = new EventWaiter();
-
-        CommandClientBuilder client = new CommandClientBuilder();
-
-        client.useDefaultGame().setOwnerId(config.getOwnerId()).setPrefix(config.getPrefix()).setActivity(Activity.playing("loading..."));
+        CommandBuilder client = new CommandBuilder(config.getPrefix());
 
         // TODO: 19/07/2020 do .lockdown command 
 
@@ -71,6 +66,7 @@ public class MCB {
                 new ReportCommand(),
                 new StopCommand(),
                 new DebugCommand(),
+                new LeaveCommand(),
                 new StatusCommand(),
                 new SaveCommand(),
                 new SayCommand(),
@@ -83,7 +79,7 @@ public class MCB {
                 .setMemberCachePolicy(MemberCachePolicy.ALL)
                 .enableIntents(GatewayIntent.GUILD_MEMBERS)
                 .enableIntents(GatewayIntent.GUILD_PRESENCES)
-                .addEventListeners(waiter, client.build());
+                .addEventListeners(client.build());
 
         jdaBuilder.addEventListeners(new UserEvents(),
                 new GetRolesEvents(),
@@ -99,9 +95,9 @@ public class MCB {
 
         remindersManager = new RemindersManager();
 
-        /*Timer timer = new Timer();
+        Timer timer = new Timer();
 
-        timer.schedule(new ReactionsEventsMessagesClean(), 1000*120, 1000*120);*/
+        timer.schedule(new ReactionsEventsMessagesClean(), 1000*120, 1000*120);
 
         jda.getPresence().setActivity(Activity.playing(config.getStatus()));
 
