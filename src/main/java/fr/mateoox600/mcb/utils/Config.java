@@ -8,39 +8,6 @@ import java.nio.charset.StandardCharsets;
 
 public class Config {
 
-    /*private String status;
-
-    public final String STATUS_PREFIX = "(In Dev) ";
-    public final String STATUS_MESSAGE = "Existing... little bit";
-    public final String PREFIX = ".";
-    public final String TOKEN = "NzE0MTU1NzY5NTE1MjEyODMx.XvuwAw.uKTpJj9DKK5AfxHbUSEnkxWaEcw";
-    public final String OWNER_ID = "251978573139673088";
-
-    public Config() {
-        status = this.STATUS_PREFIX + this.STATUS_MESSAGE;
-    }
-
-    public String getPrefix() {
-        return this.PREFIX;
-    }
-
-    public String getToken() {
-        return this.TOKEN;
-    }
-
-    public String getOwnerId() {
-        return this.OWNER_ID;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public String setStatus(String status) {
-        return this.status = this.STATUS_PREFIX + status;
-    }*/
-
-
     private final JSONObject config;
     private final File dataFolder;
     private final String token;
