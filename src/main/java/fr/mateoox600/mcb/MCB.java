@@ -26,8 +26,8 @@ import net.dv8tion.jda.api.utils.MemberCachePolicy;
 
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -39,9 +39,9 @@ public class MCB {
     public static JDA jda;
     public static HashMap<String, Message> reactionsEventMessage = new HashMap<>();
     public static Emote MCBEmote;
-    public static String[] reactionNumber = new String[]{"\u0030\u20E3","\u0031\u20E3","\u0032\u20E3","\u0033\u20E3","\u0034\u20E3","\u0035\u20E3", "\u0036\u20E3","\u0037\u20E3","\u0038\u20E3","\u0039\u20E3"};
+    public static String[] reactionNumber = new String[]{"\u0030\u20E3", "\u0031\u20E3", "\u0032\u20E3", "\u0033\u20E3", "\u0034\u20E3", "\u0035\u20E3", "\u0036\u20E3", "\u0037\u20E3", "\u0038\u20E3", "\u0039\u20E3"};
 
-    public static void main(String[] args) throws LoginException, InterruptedException, URISyntaxException, IOException {
+    public static void main(String[] args) throws LoginException, InterruptedException, IOException {
 
         config = new Config("config.json");
 
@@ -89,20 +89,21 @@ public class MCB {
 
         jda.awaitReady();
 
-        MCBEmote = jda.getGuildById("713826539698913320").getEmotesByName("MCB", false).get(0);
+        MCBEmote = Objects.requireNonNull(jda.getGuildById("713826539698913320")).getEmotesByName("MCB", false).get(0);
 
         remindersManager = new RemindersManager();
 
         Timer timer = new Timer();
 
-        timer.schedule(new ReactionsEventsMessagesClean(), 1000*120, 1000*120);
+        timer.schedule(new ReactionsEventsMessagesClean(), 1000 * 120, 1000 * 120);
 
         jda.getPresence().setActivity(Activity.playing(config.getStatus()));
 
     }
 
 }
-class ReactionsEventsMessagesClean extends TimerTask{
+
+class ReactionsEventsMessagesClean extends TimerTask {
 
     @Override
     public void run() {
