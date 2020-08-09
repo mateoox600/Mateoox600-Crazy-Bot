@@ -19,6 +19,8 @@ public class GetRolesEvents extends ListenerAdapter {
                 e.getGuild().addRoleToMember(e.getMember(), e.getJDA().getRoleById("728239620143317054")).complete();
             if (e.getReactionEmote().getName().equals("CassiMon"))
                 e.getGuild().addRoleToMember(e.getMember(), e.getJDA().getRoleById("728634203473838170")).complete();
+            if (e.getReactionEmote().getName().equals("BadmintonBot"))
+                e.getGuild().addRoleToMember(e.getMember(), e.getJDA().getRoleById("738421903152381965")).complete();
         }
     }
 
@@ -33,6 +35,8 @@ public class GetRolesEvents extends ListenerAdapter {
                 e.getGuild().removeRoleFromMember(e.getMember(), e.getJDA().getRoleById("728239620143317054")).complete();
             if (e.getReactionEmote().getName().equals("CassiMon"))
                 e.getGuild().removeRoleFromMember(e.getMember(), e.getJDA().getRoleById("728634203473838170")).complete();
+            if (e.getReactionEmote().getName().equals("BadmintonBot"))
+                e.getGuild().removeRoleFromMember(e.getMember(), e.getJDA().getRoleById("738421903152381965")).complete();
         }
     }
 

@@ -11,21 +11,20 @@ public class SaveCommand extends Command {
 
     public SaveCommand() {
         this.name = "save";
-        this.help = "Bot Owner Command: Save the bot data";
+        this.help = "Save the bot data";
+        this.owner = owner;
     }
 
     @Override
     protected void execute(CommandEvent e) {
         String[] args = e.getMessage().getContentRaw().split("\\s+");
         args = Arrays.copyOfRange(args, 1, args.length);
-        if (e.getAuthor().getId().equals(MCB.config.getOwnerId())) {
-            try {
-                MCB.remindersManager.save();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-            e.getChannel().sendMessage("You made a save of all the bot data").queue();
+        try {
+            MCB.remindersManager.save();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
         }
+        e.getChannel().sendMessage("You made a save of all the bot data").queue();
     }
 
 }

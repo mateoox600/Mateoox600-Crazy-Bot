@@ -17,10 +17,15 @@ public class CommandBuilder {
 
     public void addCommand(Command command){
         commands.add(command);
+        System.out.println("[INFO] Command add: " + command.name);
     }
 
     public void addCommands(Command... commands){
-        for (Command command : commands) addCommand(command);
+        System.out.println("[INFO] Command loading start");
+        for (Command command : commands) {
+            addCommand(command);
+        }
+        System.out.println("[INFO] Commands loaded");
     }
 
     public CommandExecutor build(){

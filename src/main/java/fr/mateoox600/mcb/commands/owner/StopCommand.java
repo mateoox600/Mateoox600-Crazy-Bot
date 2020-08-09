@@ -11,14 +11,14 @@ public class StopCommand extends Command {
 
     public StopCommand() {
         this.name = "stop";
-        this.help = "Bot Owner Command: Stop the bot";
+        this.help = "Stop the bot";
+        this.owner = true;
     }
 
     @Override
     protected void execute(CommandEvent e) {
         String[] args = e.getMessage().getContentRaw().split("\\s+");
         args = Arrays.copyOfRange(args, 1, args.length);
-        if (e.getAuthor().getId().equals(MCB.config.getOwnerId())) {
             try {
                 MCB.remindersManager.save();
             } catch (IOException ioException) {
@@ -31,7 +31,6 @@ public class StopCommand extends Command {
             } catch (Exception ignored) {
             }
             System.exit(exitCode);
-        }
     }
 
 }

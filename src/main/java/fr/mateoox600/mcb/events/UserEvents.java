@@ -16,7 +16,8 @@ public class UserEvents extends ListenerAdapter {
             e.getGuild().addRoleToMember(e.getMember(), e.getJDA().getRoleById("714090191182233602")).complete();
             EmbedBuilder embedBuilder = new EmbedBuilder();
 
-            embedBuilder.setTitle(e.getUser().getName(), e.getUser().getEffectiveAvatarUrl());
+            embedBuilder.setTitle(e.getUser().getName());
+            embedBuilder.setImage(e.getUser().getEffectiveAvatarUrl());
             embedBuilder.setColor(Color.GREEN);
 
             e.getGuild().getTextChannelById("713827717404950538").sendMessage(embedBuilder.build()).queue();
@@ -28,7 +29,8 @@ public class UserEvents extends ListenerAdapter {
         if (e.getGuild().getId().equals("713826539698913320")) {
             EmbedBuilder embedBuilder = new EmbedBuilder();
 
-            embedBuilder.setTitle(e.getUser().getName(), e.getUser().getEffectiveAvatarUrl());
+            embedBuilder.setTitle(e.getUser().getName());
+            embedBuilder.setImage(e.getUser().getEffectiveAvatarUrl());
             embedBuilder.setColor(Color.RED);
 
             e.getGuild().getTextChannelById("713827717404950538").sendMessage(embedBuilder.build()).queue();

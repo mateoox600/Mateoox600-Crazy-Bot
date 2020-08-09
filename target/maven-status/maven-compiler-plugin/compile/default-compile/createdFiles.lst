@@ -1,3 +1,4 @@
+fr\mateoox600\mcb\commands\UserInfoCommand.class
 fr\mateoox600\mcb\commands\manager\CommandBuilder.class
 fr\mateoox600\mcb\commands\manager\Command.class
 fr\mateoox600\mcb\commands\manager\CommandEvent.class

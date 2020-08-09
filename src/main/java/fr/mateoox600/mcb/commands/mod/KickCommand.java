@@ -1,5 +1,6 @@
 package fr.mateoox600.mcb.commands.mod;
 
+import fr.mateoox600.mcb.MCB;
 import fr.mateoox600.mcb.commands.manager.Command;
 import fr.mateoox600.mcb.commands.manager.CommandEvent;
 import net.dv8tion.jda.api.Permission;
@@ -19,13 +20,19 @@ public class KickCommand extends Command {
     protected void execute(CommandEvent e) {
         String[] args = e.getMessage().getContentRaw().split("\\s+");
         args = Arrays.copyOfRange(args, 1, args.length);
-        if (!e.getMember().hasPermission(Permission.KICK_MEMBERS) || !e.getMember().hasPermission(Permission.ADMINISTRATOR)) {
+        if (!e.getMember().hasPermission(Permission.KICK_MEMBERS) || !e.getMember().hasPermission(Permission.ADMINISTRATOR) || !e.getAuthor().getId().equals(MCB.config.getOwnerId()) || !e.getMember().isOwner()) {
             e.getChannel().sendMessage("```You don't have this permission```").queue();
             return;
         }
         if (args.length > 0) {
             Member target = e.getMessage().getMentionedMembers().get(0);
             if (target != null) {
+
+                if (target.getId().equals(MCB.config.getOwnerId())){
+                    e.getChannel().sendMessage("```Error: you cannot kick bot owner```").queue();
+                    return;
+                }
+
                 if (args.length == 1) {
                     target.getUser().openPrivateChannel().complete().sendMessage("You have been kick from " + e.getGuild().getName()).queue();
                     e.getGuild().kick(target).queue();

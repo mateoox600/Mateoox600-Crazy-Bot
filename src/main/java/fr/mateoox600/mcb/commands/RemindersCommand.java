@@ -34,7 +34,7 @@ public class RemindersCommand extends Command {
                     if (arg.equalsIgnoreCase("-id")) {
                         if (args.length > i + 1) {
                             args_skip++;
-                            if (e.getMember().hasPermission(Permission.ADMINISTRATOR)) {
+                            if (e.getMember().hasPermission(Permission.ADMINISTRATOR) || e.getMember().getId().equals(MCB.config.getOwnerId())) {
                                 try {
                                     member = e.getGuild().getMemberById(args[i + 1]);
                                 } catch (Exception exception) {
