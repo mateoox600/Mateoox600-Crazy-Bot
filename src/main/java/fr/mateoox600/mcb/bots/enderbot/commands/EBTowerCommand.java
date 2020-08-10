@@ -1,4 +1,4 @@
-package fr.mateoox600.mcb.enderbot.commands;
+package fr.mateoox600.mcb.bots.enderbot.commands;
 
 import fr.mateoox600.mcb.MCB;
 import fr.mateoox600.mcb.commands.manager.Command;

@@ -76,6 +76,10 @@ public class Reminder {
         return text;
     }
 
+    public TextChannel getChannel() {
+        return channel;
+    }
+
     public String getSaveMsg() {
         return end + "/" + text + "/" + user.getId() + "/" + channel.getId();
     }

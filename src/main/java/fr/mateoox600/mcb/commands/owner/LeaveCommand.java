@@ -13,6 +13,7 @@ public class LeaveCommand extends Command {
         this.help = "Make the bot leave a server";
         this.arguments = "<server id>";
         this.owner = true;
+        this.inHelp = false;
     }
 
     @Override
@@ -20,11 +21,15 @@ public class LeaveCommand extends Command {
         String[] args = e.getMessage().getContentRaw().split("\\s+");
         args = Arrays.copyOfRange(args, 1, args.length);
         if (args.length > 0) {
-            e.getJDA().getGuildById(args[0]).leave().queue();
+            try{
+                e.getJDA().getGuildById(args[0]).leave().queue();
+            }catch (Exception exception){
+                e.getChannel().sendMessage("```Error: Enter a valid long discord guild id```").queue();
+            }
         } else {
             StringBuilder stringBuilder = new StringBuilder("```");
             for (Guild guilds : e.getJDA().getGuilds()) {
-                stringBuilder.append("\n- ").append(guilds.getName()).append(": ").append(guilds.getId());
+                stringBuilder.append("\n- ").append(guilds.getName().replace("`", "")).append(": ").append(guilds.getId());
             }
             stringBuilder.append("```");
             e.getChannel().sendMessage(stringBuilder.toString()).queue();

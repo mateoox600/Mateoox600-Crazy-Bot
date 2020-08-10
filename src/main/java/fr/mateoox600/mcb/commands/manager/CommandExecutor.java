@@ -12,7 +12,7 @@ public class CommandExecutor extends ListenerAdapter {
 
     CommandBuilder commandBuilder;
 
-    public CommandExecutor(CommandBuilder commandBuilder){
+    public CommandExecutor(CommandBuilder commandBuilder) {
         this.commandBuilder = commandBuilder;
     }
 
@@ -24,20 +24,21 @@ public class CommandExecutor extends ListenerAdapter {
         if (!args[0].startsWith(commandBuilder.prefix)) return;
         if (e.getChannelType() == ChannelType.PRIVATE) return;
 
-        if (args[0].substring(commandBuilder.prefix.length()).equalsIgnoreCase("help")){
+        if (args[0].substring(commandBuilder.prefix.length()).equalsIgnoreCase("help")) {
             StringBuilder stringBuilder = new StringBuilder("**Mateoox600 Crazy Bot** commands: \n");
-            for (Command command : commandBuilder.commands){
-                stringBuilder.append("\n`")
-                        .append(commandBuilder.prefix)
-                        .append(command.name)
-                        .append(" ")
-                        .append(command.arguments)
-                        .append("` - ")
-                        .append(command.owner ? "Bot command owner: " : "")
-                        .append(command.help);
+            for (Command command : commandBuilder.commands) {
+                if (command.inHelp)
+                    stringBuilder.append("\n`")
+                            .append(commandBuilder.prefix)
+                            .append(command.name)
+                            .append(" ")
+                            .append(command.arguments)
+                            .append("` - ")
+                            .append(command.owner ? "Bot command owner: " : "")
+                            .append(command.help);
             }
             stringBuilder.append("\n\nFor additional help, contact **Mateoox600**#9473");
-            System.out.println("[INFO] Server" + e.getGuild().getName() + " - " + e.getMember().getUser().getName() + ": " + e.getMessage().getContentRaw());
+            System.out.println("[INFO] Server: " + e.getGuild().getName() + " - " + e.getMember().getUser().getName() + ": " + e.getMessage().getContentRaw());
             e.getAuthor().openPrivateChannel().queue(channel -> channel.sendMessage(stringBuilder.toString()).queue(msg -> e.getChannel().sendMessage("Help message sended").queue()));
             return;
         }
@@ -45,12 +46,12 @@ public class CommandExecutor extends ListenerAdapter {
         Command select = null;
         String strCommand = args[0].substring(commandBuilder.prefix.length()).toLowerCase();
 
-        for (Command command : commandBuilder.commands){
-            if (command.name.toLowerCase().equals(strCommand)){
+        for (Command command : commandBuilder.commands) {
+            if (command.name.toLowerCase().equals(strCommand)) {
                 select = command;
                 break;
-            }else{
-                if (Arrays.asList(command.aliases).contains(strCommand)){
+            } else {
+                if (Arrays.asList(command.aliases).contains(strCommand)) {
                     select = command;
                     break;
                 }
@@ -59,7 +60,7 @@ public class CommandExecutor extends ListenerAdapter {
 
         if (select == null) return;
 
-        System.out.println("[INFO] Server" + e.getGuild().getName() + " - " + e.getMember().getUser().getName() + ": " + e.getMessage().getContentRaw());
+        System.out.println("[INFO] Server: " + e.getGuild().getName() + " - " + e.getMember().getUser().getName() + ": " + e.getMessage().getContentRaw());
         if (select.owner)
             if (!e.getAuthor().getId().equals(MCB.config.getOwnerId())) {
                 e.getChannel().sendMessage("```Error: you don't have the permission to do bot owner command```").queue();

@@ -1,15 +1,16 @@
 package fr.mateoox600.mcb;
 
+import fr.mateoox600.mcb.bots.badmintonbot.events.BadBotMessageEvents;
 import fr.mateoox600.mcb.commands.*;
 import fr.mateoox600.mcb.commands.manager.CommandBuilder;
 import fr.mateoox600.mcb.commands.mod.KickCommand;
 import fr.mateoox600.mcb.commands.owner.*;
-import fr.mateoox600.mcb.enderbot.commands.EBGiftCommand;
-import fr.mateoox600.mcb.enderbot.commands.EBTowerCommand;
-import fr.mateoox600.mcb.enderbot.commands.owner.EnderBotOwnerCommand;
-import fr.mateoox600.mcb.enderbot.events.EBMessageEvents;
-import fr.mateoox600.mcb.enderbot.events.EBMiningEvents;
-import fr.mateoox600.mcb.enderbot.utils.EBTower;
+import fr.mateoox600.mcb.bots.enderbot.commands.EBGiftCommand;
+import fr.mateoox600.mcb.bots.enderbot.commands.EBTowerCommand;
+import fr.mateoox600.mcb.bots.enderbot.commands.owner.EnderBotOwnerCommand;
+import fr.mateoox600.mcb.bots.enderbot.events.EBMessageEvents;
+import fr.mateoox600.mcb.bots.enderbot.events.EBMiningEvents;
+import fr.mateoox600.mcb.bots.enderbot.utils.EBTower;
 import fr.mateoox600.mcb.events.BinaryEvent;
 import fr.mateoox600.mcb.events.GetRolesEvents;
 import fr.mateoox600.mcb.events.UserEvents;
@@ -26,13 +27,11 @@ import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 
 import javax.security.auth.login.LoginException;
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Level;
 
 public class MCB {
 
@@ -92,6 +91,7 @@ public class MCB {
                         new GetRolesEvents(),
                         new EBMiningEvents(),
                         new EBMessageEvents(),
+                        new BadBotMessageEvents(),
                         new BinaryEvent());
         System.out.println("[INFO] JDABuilder created");
 

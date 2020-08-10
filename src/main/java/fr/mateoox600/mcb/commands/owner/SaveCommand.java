@@ -12,7 +12,7 @@ public class SaveCommand extends Command {
     public SaveCommand() {
         this.name = "save";
         this.help = "Save the bot data";
-        this.owner = owner;
+        this.owner = true;
     }
 
     @Override

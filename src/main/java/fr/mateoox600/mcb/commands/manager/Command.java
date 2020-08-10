@@ -7,6 +7,7 @@ public abstract class Command {
     public String help = "No help for this command";
     public String arguments = "";
     public boolean owner = false;
+    public boolean inHelp = true;
 
     protected abstract void execute(CommandEvent event);
 

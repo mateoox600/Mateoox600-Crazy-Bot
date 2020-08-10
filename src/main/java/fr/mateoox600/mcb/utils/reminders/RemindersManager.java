@@ -90,13 +90,13 @@ public class RemindersManager {
         Reminder reminder = new Reminder(in, member.getUser(), channel, text, message);
         reminders.add(reminder);
         reminder.start();
-        System.out.println("[INFO] Reminder launch: " + reminder.getText() + " for " + reminder.getUser());
+        System.out.println("[INFO] Reminder launch: " + reminder.getText() + " for " + reminder.getUser() + " from " + reminder.getChannel().getGuild().getName());
     }
 
     public void addReminder(Reminder reminder) {
         reminders.add(reminder);
         reminder.start();
-        System.out.println("[INFO] Reminder launch: " + reminder.getText() + " for " + reminder.getUser().getName());
+        System.out.println("[INFO] Reminder launch: " + reminder.getText() + " for " + reminder.getUser().getName() + " from " + reminder.getChannel().getGuild().getName());
     }
 
     public void save() throws IOException {

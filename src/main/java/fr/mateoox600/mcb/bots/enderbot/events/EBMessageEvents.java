@@ -1,4 +1,4 @@
-package fr.mateoox600.mcb.enderbot.events;
+package fr.mateoox600.mcb.bots.enderbot.events;
 
 import fr.mateoox600.mcb.MCB;
 import fr.mateoox600.mcb.utils.reminders.RemindersManager;

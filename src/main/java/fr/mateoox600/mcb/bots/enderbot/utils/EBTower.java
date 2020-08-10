@@ -1,4 +1,4 @@
-package fr.mateoox600.mcb.enderbot.utils;
+package fr.mateoox600.mcb.bots.enderbot.utils;
 
 import org.json.JSONObject;
 

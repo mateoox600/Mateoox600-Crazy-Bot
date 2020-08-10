@@ -1,7 +1,6 @@
-package fr.mateoox600.mcb.enderbot.events;
+package fr.mateoox600.mcb.bots.enderbot.events;
 
 import fr.mateoox600.mcb.MCB;
-import fr.mateoox600.mcb.utils.reminders.RemindersManager;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageEmbed;
@@ -11,7 +10,6 @@ import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import javax.annotation.Nonnull;
-import java.util.Timer;
 
 public class EBMiningEvents extends ListenerAdapter {
 

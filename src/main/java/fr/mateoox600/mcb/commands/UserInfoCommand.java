@@ -79,8 +79,12 @@ public class UserInfoCommand extends Command {
         }
 
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(Long.parseLong(Long.toBinaryString(Long.parseLong(user.getId())).substring(22), 2) + 1420070400000L);
+        StringBuilder binaryOutput = new StringBuilder(Long.toBinaryString(Long.parseLong(user.getId())));
+        int oLength = binaryOutput.length();
+        for (int i = 0; i < 64-oLength; i++) binaryOutput.insert(0, "0");
+        calendar.setTimeInMillis(Long.parseLong(binaryOutput.substring(0, binaryOutput.length()-22), 2) + 1420070400000L);
         StringBuilder badges = new StringBuilder();
+        if (user.getUser().getFlags().isEmpty()) badges.append("None");
         for (User.UserFlag flag : user.getUser().getFlags()){
             badges.append("- ").append(flag.getName()).append("\n");
         }
@@ -89,7 +93,9 @@ public class UserInfoCommand extends Command {
                 .setColor(user.getRoles().get(0).getColor())
                 .addField("Created", calendar.get(Calendar.DAY_OF_MONTH) + "-" + (calendar.get(Calendar.MONTH)+1) + "-" + calendar.get(Calendar.YEAR) + " " + calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE) + ":" + calendar.get(Calendar.SECOND), true)
                 .addField("Id", user.getId(), true)
-                .addField("Badges", badges.toString(), true);
+                .addField("Badges", badges.toString(), true)
+                .addField("Discord Tag", user.getUser().getName() + "#" + user.getUser().getDiscriminator(), true)
+                .addField("Bot: ", user.getUser().isBot() ? "yes" : "no", true);
         e.getChannel().sendMessage(embed.build()).queue();
     }
 
