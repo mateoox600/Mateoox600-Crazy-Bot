@@ -1,4 +1,4 @@
-package fr.mateoox600.mcb.utils.reminders;
+package fr.mateoox600.mcb.reminders.utils;
 
 import fr.mateoox600.mcb.MCB;
 import net.dv8tion.jda.api.EmbedBuilder;

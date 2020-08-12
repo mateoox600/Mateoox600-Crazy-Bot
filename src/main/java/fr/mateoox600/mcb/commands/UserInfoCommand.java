@@ -23,7 +23,7 @@ public class UserInfoCommand extends Command {
         String[] args = e.getMessage().getContentRaw().split("\\s+");
         args = Arrays.copyOfRange(args, 1, args.length);
 
-        Member user = e.getMember();
+        User user = e.getMember().getUser();
 
 
         if (args.length > 0) {
@@ -38,7 +38,7 @@ public class UserInfoCommand extends Command {
                             args_skip++;
                             if (e.getMember().hasPermission(Permission.ADMINISTRATOR) || e.getMember().getId().equals(MCB.config.getOwnerId())) {
                                 try {
-                                    user = e.getGuild().getMemberById(args[i + 1]);
+                                    user = e.getJDA().getUserById(args[i + 1]);
                                 } catch (Exception exception) {
                                     e.getChannel().sendMessage("```Error: -id suffix require valid long user id```").queue();
                                     return;
@@ -58,7 +58,7 @@ public class UserInfoCommand extends Command {
                             args_skip++;
                             if (e.getMember().hasPermission(Permission.ADMINISTRATOR) || e.getMember().getId().equals(MCB.config.getOwnerId())) {
                                 try {
-                                    user = e.getGuild().getMemberById(args[i + 1].substring(3, args[i+1].length()-1));
+                                    user = e.getJDA().getUserById(args[i + 1].substring(3, args[i+1].length()-1));
                                 } catch (Exception exception) {
                                     e.getChannel().sendMessage("```Error: -user suffix require valid user mention (<@!id>)```").queue();
                                     return;
@@ -84,18 +84,17 @@ public class UserInfoCommand extends Command {
         for (int i = 0; i < 64-oLength; i++) binaryOutput.insert(0, "0");
         calendar.setTimeInMillis(Long.parseLong(binaryOutput.substring(0, binaryOutput.length()-22), 2) + 1420070400000L);
         StringBuilder badges = new StringBuilder();
-        if (user.getUser().getFlags().isEmpty()) badges.append("None");
-        for (User.UserFlag flag : user.getUser().getFlags()){
+        if (user.getFlags().isEmpty()) badges.append("None");
+        for (User.UserFlag flag : user.getFlags()){
             badges.append("- ").append(flag.getName()).append("\n");
         }
-        EmbedBuilder embed = new EmbedBuilder().setTitle(user.getUser().getName() + " account information")
-                .setImage(user.getUser().getEffectiveAvatarUrl())
-                .setColor(user.getRoles().get(0).getColor())
+        EmbedBuilder embed = new EmbedBuilder().setTitle(user.getName() + " account information")
+                .setImage(user.getEffectiveAvatarUrl())
                 .addField("Created", calendar.get(Calendar.DAY_OF_MONTH) + "-" + (calendar.get(Calendar.MONTH)+1) + "-" + calendar.get(Calendar.YEAR) + " " + calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE) + ":" + calendar.get(Calendar.SECOND), true)
                 .addField("Id", user.getId(), true)
                 .addField("Badges", badges.toString(), true)
-                .addField("Discord Tag", user.getUser().getName() + "#" + user.getUser().getDiscriminator(), true)
-                .addField("Bot: ", user.getUser().isBot() ? "yes" : "no", true);
+                .addField("Discord Tag", user.getName() + "#" + user.getDiscriminator(), true)
+                .addField("Bot: ", user.isBot() ? "yes" : "no", true);
         e.getChannel().sendMessage(embed.build()).queue();
     }
 

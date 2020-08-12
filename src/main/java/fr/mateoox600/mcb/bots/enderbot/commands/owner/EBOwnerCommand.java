@@ -6,9 +6,9 @@ import fr.mateoox600.mcb.commands.manager.CommandEvent;
 
 import java.util.Arrays;
 
-public class EnderBotOwnerCommand extends Command {
+public class EBOwnerCommand extends Command {
 
-    public EnderBotOwnerCommand() {
+    public EBOwnerCommand() {
         this.name = "ebo";
         this.help = "Bot Owner Command: EnderBot management";
     }

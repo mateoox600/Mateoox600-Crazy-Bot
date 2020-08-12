@@ -1,22 +1,26 @@
 package fr.mateoox600.mcb;
 
-import fr.mateoox600.mcb.bots.badmintonbot.events.BadBotMessageEvents;
+import fr.mateoox600.mcb.reminders.events.BadmintonBotMessageEvents;
 import fr.mateoox600.mcb.commands.*;
 import fr.mateoox600.mcb.commands.manager.CommandBuilder;
 import fr.mateoox600.mcb.commands.mod.KickCommand;
 import fr.mateoox600.mcb.commands.owner.*;
 import fr.mateoox600.mcb.bots.enderbot.commands.EBGiftCommand;
 import fr.mateoox600.mcb.bots.enderbot.commands.EBTowerCommand;
-import fr.mateoox600.mcb.bots.enderbot.commands.owner.EnderBotOwnerCommand;
-import fr.mateoox600.mcb.bots.enderbot.events.EBMessageEvents;
+import fr.mateoox600.mcb.bots.enderbot.commands.owner.EBOwnerCommand;
+import fr.mateoox600.mcb.reminders.events.EBMessageEvents;
 import fr.mateoox600.mcb.bots.enderbot.events.EBMiningEvents;
 import fr.mateoox600.mcb.bots.enderbot.utils.EBTower;
 import fr.mateoox600.mcb.events.BinaryEvent;
 import fr.mateoox600.mcb.events.GetRolesEvents;
 import fr.mateoox600.mcb.events.UserEvents;
+import fr.mateoox600.mcb.reminders.commands.DeleteReminderCommand;
+import fr.mateoox600.mcb.reminders.commands.ReminderCommand;
+import fr.mateoox600.mcb.reminders.commands.RemindersCommand;
 import fr.mateoox600.mcb.utils.Config;
+import fr.mateoox600.mcb.utils.crtlpanel.ControlPanel;
 import fr.mateoox600.mcb.utils.Logger;
-import fr.mateoox600.mcb.utils.reminders.RemindersManager;
+import fr.mateoox600.mcb.reminders.utils.RemindersManager;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
@@ -28,10 +32,7 @@ import net.dv8tion.jda.api.utils.MemberCachePolicy;
 
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 public class MCB {
 
@@ -40,18 +41,24 @@ public class MCB {
     public static Config config;
     public static RemindersManager remindersManager;
     public static JDA jda;
-    public static HashMap<String, Message> reactionsEventMessage = new HashMap<>();
     public static Emote MCBEmote;
+    public static ControlPanel controlPanel;
+    public static HashMap<String, Message> reactionsEventMessage = new HashMap<>();
     public static String[] reactionNumber = new String[]{"\u0030\u20E3", "\u0031\u20E3", "\u0032\u20E3", "\u0033\u20E3", "\u0034\u20E3", "\u0035\u20E3", "\u0036\u20E3", "\u0037\u20E3", "\u0038\u20E3", "\u0039\u20E3"};
 
+    // TODO: 11/08/2020 JFrame Control panel
     public static void main(String[] args) throws LoginException, InterruptedException, IOException {
+
+        config = new Config("config.json");
+
+        controlPanel = new ControlPanel("MCB Control Panel");
 
         logger = new Logger(System.out, "latest.log");
         logger.attach();
         System.out.println("[INFO] Logging enable");
 
-        config = new Config("config.json");
-        System.out.println("[INFO] Config Loaded");
+        config.launch();
+        System.out.println("[INFO] Config loaded");
 
         if (!config.getDataFolder().exists()) config.getDataFolder().mkdirs();
 
@@ -59,7 +66,7 @@ public class MCB {
         System.out.println("[INFO] EnderBot Tower loaded");
 
         CommandBuilder client = new CommandBuilder(config.getPrefix());
-        System.out.println("[INFO] CommandBuilder Created");
+        System.out.println("[INFO] CommandBuilder created");
 
         client.addCommands(new BinaryCommand(),
                 new PingCommand(),
@@ -79,7 +86,8 @@ public class MCB {
                 new StatusCommand(),
                 new SaveCommand(),
                 new SayCommand(),
-                new EnderBotOwnerCommand());
+                new QueryCommand(),
+                new EBOwnerCommand());
 
         JDABuilder jdaBuilder = JDABuilder.createDefault(config.getToken())
                 .setChunkingFilter(ChunkingFilter.ALL)
@@ -91,12 +99,12 @@ public class MCB {
                         new GetRolesEvents(),
                         new EBMiningEvents(),
                         new EBMessageEvents(),
-                        new BadBotMessageEvents(),
+                        new BadmintonBotMessageEvents(),
                         new BinaryEvent());
         System.out.println("[INFO] JDABuilder created");
 
         jda = jdaBuilder.build();
-        System.out.println("[INFO] JDA Build");
+        System.out.println("[INFO] JDA build");
 
         jda.getPresence().setActivity(Activity.playing("Loading..."));
         System.out.println("[INFO] await ready");
@@ -115,6 +123,13 @@ public class MCB {
         jda.getPresence().setActivity(Activity.playing(config.getStatus()));
         System.out.println("[INFO] Setting default status");
 
+    }
+
+    public static void stop() throws IOException {
+        remindersManager.save();
+        jda.shutdown();
+        System.out.println("[INFO] Bot stopped");
+        System.exit(0);
     }
 
 }

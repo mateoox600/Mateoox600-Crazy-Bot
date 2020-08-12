@@ -1,4 +1,4 @@
-package fr.mateoox600.mcb.utils.reminders;
+package fr.mateoox600.mcb.reminders.utils;
 
 import fr.mateoox600.mcb.MCB;
 import net.dv8tion.jda.api.entities.Member;
@@ -23,7 +23,7 @@ public class RemindersManager {
         if (!remindersSaveFile.exists()) remindersSaveFile.createNewFile();
         load();
         Timer timer = new Timer();
-        timer.schedule(new RMManagerTask(), 1000 * 30, 1000 * 30);
+        timer.schedule(new RMManagerTask(), 1000 * 60, 1000 * 60);
     }
 
     public static long parseReminderTime(String arg) {

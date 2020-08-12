@@ -8,6 +8,7 @@ public abstract class Command {
     public String arguments = "";
     public boolean owner = false;
     public boolean inHelp = true;
+    public String guildOnly = "no";
 
     protected abstract void execute(CommandEvent event);
 

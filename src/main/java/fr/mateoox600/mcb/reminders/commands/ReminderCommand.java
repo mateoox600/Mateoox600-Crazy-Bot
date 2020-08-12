@@ -1,9 +1,9 @@
-package fr.mateoox600.mcb.commands;
+package fr.mateoox600.mcb.reminders.commands;
 
 import fr.mateoox600.mcb.MCB;
 import fr.mateoox600.mcb.commands.manager.Command;
 import fr.mateoox600.mcb.commands.manager.CommandEvent;
-import fr.mateoox600.mcb.utils.reminders.RemindersManager;
+import fr.mateoox600.mcb.reminders.utils.RemindersManager;
 
 import java.util.Arrays;
 

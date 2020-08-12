@@ -28,6 +28,9 @@ public class CommandExecutor extends ListenerAdapter {
             StringBuilder stringBuilder = new StringBuilder("**Mateoox600 Crazy Bot** commands: \n");
             for (Command command : commandBuilder.commands) {
                 if (command.inHelp)
+                    if (!command.guildOnly.equalsIgnoreCase("no"))
+                        if (!e.getGuild().getId().equals(command.guildOnly))
+                            continue;
                     stringBuilder.append("\n`")
                             .append(commandBuilder.prefix)
                             .append(command.name)
@@ -64,6 +67,12 @@ public class CommandExecutor extends ListenerAdapter {
         if (select.owner)
             if (!e.getAuthor().getId().equals(MCB.config.getOwnerId())) {
                 e.getChannel().sendMessage("```Error: you don't have the permission to do bot owner command```").queue();
+                return;
+            }
+
+        if (!select.guildOnly.equalsIgnoreCase("no"))
+            if (!e.getGuild().getId().equals(select.guildOnly)){
+                e.getChannel().sendMessage("```Error: this command is private for a guild```");
                 return;
             }
 

@@ -1,15 +1,9 @@
-package fr.mateoox600.mcb.commands;
+package fr.mateoox600.mcb.reminders.commands;
 
-import fr.mateoox600.mcb.MCB;
 import fr.mateoox600.mcb.commands.manager.Command;
 import fr.mateoox600.mcb.commands.manager.CommandEvent;
-import fr.mateoox600.mcb.utils.reminders.Reminder;
-import fr.mateoox600.mcb.utils.reminders.RemindersManager;
-import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Member;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class DeleteReminderCommand extends Command {
 

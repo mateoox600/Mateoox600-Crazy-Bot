@@ -8,12 +8,21 @@ import java.util.Objects;
 
 public class Config {
 
-    private final JSONObject config;
+    private JSONObject config;
     private final File dataFolder;
-    private final String token;
+    private  String token;
     private String status;
+    private final String resourcePath;
 
     public Config(String resourcePath) throws IOException {
+        this.resourcePath = resourcePath;
+        String path = getClass().getProtectionDomain().getCodeSource().getLocation().getPath().replace("%20", " ");
+        File dataFolder = new File(path.substring(0, path.length() - (path.split("/")[path.split("/").length - 1].length() + 1)) + "/data");
+        if (!dataFolder.exists()) dataFolder.mkdirs();
+        this.dataFolder = dataFolder;
+    }
+
+    public void launch() throws IOException {
         InputStreamReader inr = new InputStreamReader(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(resourcePath)), StandardCharsets.UTF_8);
         char[] charBuffer = new char[2048];
         StringBuilder jsonFile = new StringBuilder();
@@ -22,8 +31,6 @@ public class Config {
         }
         config = new JSONObject(jsonFile.toString());
         status = config.getString("status_prefix") + config.getString("status_message");
-        String path = getClass().getProtectionDomain().getCodeSource().getLocation().getPath().replace("%20", " ");
-        dataFolder = new File(path.substring(0, path.length() - (path.split("/")[path.split("/").length - 1].length() + 1)) + "/data");
         BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(dataFolder, "token.txt")));
         token = bufferedReader.readLine();
         bufferedReader.close();
