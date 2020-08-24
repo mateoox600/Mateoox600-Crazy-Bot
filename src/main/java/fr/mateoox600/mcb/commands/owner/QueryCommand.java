@@ -14,6 +14,7 @@ public class QueryCommand extends Command {
         this.aliases = new String[]{"q"};
         this.help = "Query command";
         this.owner = true;
+        this.arguments = "<userid/usertag> <text>";
     }
 
     @Override
@@ -21,27 +22,31 @@ public class QueryCommand extends Command {
         String[] args = e.getMessage().getContentRaw().split("\\s+");
         args = Arrays.copyOfRange(args, 1, args.length);
         if (args.length > 0) {
-            if (args[0].equalsIgnoreCase("user")) {
+            if (args[0].equalsIgnoreCase("userid")) {
                 if (args.length > 1) {
-                    User user = null;
-                    try {
-                        user = e.getJDA().getUserById(args[1]);
-                    } catch (Exception ignored) {
-                    }
-                    if (user == null)
-                        user = e.getJDA().getUserByTag(args[1]);
+                    User user = e.getJDA().getUserById(args[1]);
                     EmbedBuilder embedBuilder = new EmbedBuilder();
                     embedBuilder.setTitle("Query")
                             .addField(user == null ? "None" : "Find " + user.getName(), user == null ? "" : ("Id: " + user.getId() + " \nMutual guild: " + user.getMutualGuilds() + " \nBadges: " + user.getFlags()).replace("```", "`"), true);
                     e.getChannel().sendMessage(embedBuilder.build()).queue();
                 } else {
-                    e.getChannel().sendMessage("```Error: .q user <id/tag>```").queue();
+                    e.getChannel().sendMessage("```Error: .q userid <id>```").queue();
+                }
+            }else if(args[0].equalsIgnoreCase("usertag")){
+                if (args.length > 1) {
+                    User user = e.getJDA().getUserByTag(args[1]);
+                    EmbedBuilder embedBuilder = new EmbedBuilder();
+                    embedBuilder.setTitle("Query")
+                            .addField(user == null ? "None" : "Find " + user.getName(), user == null ? "" : ("Id: " + user.getId() + " \nMutual guild: " + user.getMutualGuilds() + " \nBadges: " + user.getFlags()).replace("```", "`"), true);
+                    e.getChannel().sendMessage(embedBuilder.build()).queue();
+                } else {
+                    e.getChannel().sendMessage("```Error: .q user <tag>```").queue();
                 }
             } else {
-                e.getChannel().sendMessage("```Error: .q <user> <text>```").queue();
+                e.getChannel().sendMessage("```Error: .q <userid/usertag> <text>```").queue();
             }
         } else {
-            e.getChannel().sendMessage("```Error: .q <user> <text>```").queue();
+            e.getChannel().sendMessage("```Error: .q <userid/usertag> <text>```").queue();
         }
     }
 

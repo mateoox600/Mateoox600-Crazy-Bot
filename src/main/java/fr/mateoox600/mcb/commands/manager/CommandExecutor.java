@@ -72,7 +72,7 @@ public class CommandExecutor extends ListenerAdapter {
 
         if (!select.guildOnly.equalsIgnoreCase("no"))
             if (!e.getGuild().getId().equals(select.guildOnly)){
-                e.getChannel().sendMessage("```Error: this command is private for a guild```");
+                e.getChannel().sendMessage("```Error: this command is private for a guild```").queue();
                 return;
             }
 

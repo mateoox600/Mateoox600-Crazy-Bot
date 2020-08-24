@@ -20,7 +20,7 @@ public class BadmintonBotMessageEvents extends ListenerAdapter {
             // check if there is an embed in the message
             if (e.getMessage().getEmbeds().size() > 0) {
 
-                if (e.getMessage().getEmbeds().get(0).getAuthor().getName() != null) {
+                if (e.getMessage().getEmbeds().get(0).getAuthor() != null) {
                     // check the title of the embed is a match embed
                     if (e.getMessage().getEmbeds().get(0).getAuthor().getName().startsWith("b!match ")) {
                         MessageHistory messageHistory = e.getChannel().getHistoryBefore(e.getMessage(), 10).complete();
@@ -55,6 +55,19 @@ public class BadmintonBotMessageEvents extends ListenerAdapter {
                     for (Message message : messageHistory.getRetrievedHistory()) {
                         if ((message.getContentRaw().toLowerCase().startsWith("b!breeding") || message.getContentRaw().toLowerCase().startsWith("b!bree")) &&
                                 (message.getContentRaw().toLowerCase().contains("claim") || message.getContentRaw().toLowerCase().contains("clai") || message.getContentRaw().toLowerCase().contains("cla") ||message.getContentRaw().toLowerCase().contains("cl") || message.getContentRaw().toLowerCase().contains("c"))) {
+                            if (!message.getReactions().contains(MCB.MCBEmote)) {
+                                MCB.remindersManager.addReminder("BadmintonBot Breeding", message.getMember(), e.getChannel(), RemindersManager.parseReminderTime("1d12h"), false);
+                                message.addReaction(MCB.MCBEmote).queue();
+                                break;
+                            }
+                        }
+                    }
+                }else if (e.getMessage().getContentRaw().startsWith("Vous avez donné un point de réputation à ")) {
+                    MessageHistory messageHistory = e.getChannel().getHistoryBefore(e.getMessage(), 10).complete();
+                    for (Message message : messageHistory.getRetrievedHistory()) {
+                        if (message.getMentionedUsers().isEmpty()) continue;
+                        if ((message.getContentRaw().toLowerCase().startsWith("b!rep")) &&
+                                (message.getMentionedUsers().get(0).getName().toLowerCase().contains(e.getMessage().getContentRaw().split(" ")[e.getMessage().getContentRaw().split(" ").length-1]))) {
                             if (!message.getReactions().contains(MCB.MCBEmote)) {
                                 MCB.remindersManager.addReminder("BadmintonBot Breeding", message.getMember(), e.getChannel(), RemindersManager.parseReminderTime("1d12h"), false);
                                 message.addReaction(MCB.MCBEmote).queue();

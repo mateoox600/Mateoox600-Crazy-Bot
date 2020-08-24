@@ -1,5 +1,5 @@
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\bots\enderbot\events\EBMiningEvents.java
-H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\utils\crtlpanel\events\StopButtonListener.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\ticket\Ticket.java
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\reminders\utils\Reminder.java
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\owner\SayCommand.java
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\MCB.java
@@ -7,6 +7,7 @@ H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\owner\StatusCommand.java
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\utils\Logger.java
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\bots\enderbot\utils\EBTower.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\utils\controlpanel\ControlPanel.java
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\mod\KickCommand.java
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\manager\CommandExecutor.java
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\manager\CommandBuilder.java
@@ -25,13 +26,14 @@ H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\owner\SaveCommand.java
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\reminders\events\BadmintonBotMessageEvents.java
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\manager\Command.java
-H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\utils\crtlpanel\ControlPanel.java
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\events\UserEvents.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\ticket\TicketManager.java
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\reminders\commands\ReminderCommand.java
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\BinaryCommand.java
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\owner\LeaveCommand.java
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\bots\enderbot\commands\owner\EBOwnerCommand.java
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\StatsCommand.java
+H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\ticket\TicketCommand.java
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\commands\owner\StopCommand.java
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\events\BinaryEvent.java
 H:\WorkSpace IntelliJ IDEA\Mateoox600 Crazy Bot\src\main\java\fr\mateoox600\mcb\utils\Config.java

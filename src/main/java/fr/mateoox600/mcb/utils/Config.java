@@ -14,7 +14,7 @@ public class Config {
     private String status;
     private final String resourcePath;
 
-    public Config(String resourcePath) throws IOException {
+    public Config(String resourcePath) {
         this.resourcePath = resourcePath;
         String path = getClass().getProtectionDomain().getCodeSource().getLocation().getPath().replace("%20", " ");
         File dataFolder = new File(path.substring(0, path.length() - (path.split("/")[path.split("/").length - 1].length() + 1)) + "/data");

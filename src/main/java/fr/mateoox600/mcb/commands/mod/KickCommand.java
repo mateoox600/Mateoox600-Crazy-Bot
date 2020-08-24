@@ -20,8 +20,8 @@ public class KickCommand extends Command {
     protected void execute(CommandEvent e) {
         String[] args = e.getMessage().getContentRaw().split("\\s+");
         args = Arrays.copyOfRange(args, 1, args.length);
-        if (!e.getMember().hasPermission(Permission.KICK_MEMBERS) || !e.getMember().hasPermission(Permission.ADMINISTRATOR) || !e.getAuthor().getId().equals(MCB.config.getOwnerId()) || !e.getMember().isOwner()) {
-            e.getChannel().sendMessage("```You don't have this permission```").queue();
+        if (!e.getMember().hasPermission(Permission.KICK_MEMBERS) && !e.getMember().hasPermission(Permission.ADMINISTRATOR) && !e.getAuthor().getId().equals(MCB.config.getOwnerId()) && !e.getMember().isOwner()) {
+            e.getChannel().sendMessage("```Error: You don't have this permission```").queue();
             return;
         }
         if (args.length > 0) {

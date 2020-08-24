@@ -5,10 +5,7 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,14 +26,30 @@ public class RemindersManager {
     public static long parseReminderTime(String arg) {
         int days = 0, hours = 0, minutes = 0, seconds = 0;
 
-        Matcher mat = Pattern.compile("\\d{1,}d").matcher(arg);
-        if (mat.find()) days = Integer.parseInt(mat.group().substring(0, mat.group().length() - 1));
+        Matcher mat = Pattern.compile("(\\d+)(st|nd|rd|th)").matcher(arg);
+
+        if (mat.find()) {
+            int day = Integer.parseInt(mat.group().substring(0, mat.group().length()-2));
+            Calendar currentTime = Calendar.getInstance();
+            if (day > Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH)) day = Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH);
+            if (day <= currentTime.get(Calendar.DAY_OF_MONTH)){
+                days = Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH) - currentTime.get(Calendar.DAY_OF_MONTH)+day-1;
+            }else{
+                days = day-currentTime.get(Calendar.DAY_OF_MONTH)-1;
+            }
+            hours = 24 - currentTime.get(Calendar.HOUR_OF_DAY);
+            minutes = 60 - currentTime.get(Calendar.MINUTE);
+            seconds = 60 - currentTime.get(Calendar.SECOND);
+        }
+
+        mat = Pattern.compile("\\d{1,}d").matcher(arg);
+        if (mat.find()) days += Integer.parseInt(mat.group().substring(0, mat.group().length() - 1));
         mat = Pattern.compile("\\d{1,}h").matcher(arg);
-        if (mat.find()) hours = Integer.parseInt(mat.group().substring(0, mat.group().length() - 1));
+        if (mat.find()) hours += Integer.parseInt(mat.group().substring(0, mat.group().length() - 1));
         mat = Pattern.compile("\\d{1,}m").matcher(arg);
-        if (mat.find()) minutes = Integer.parseInt(mat.group().substring(0, mat.group().length() - 1));
+        if (mat.find()) minutes += Integer.parseInt(mat.group().substring(0, mat.group().length() - 1));
         mat = Pattern.compile("\\d{1,}s").matcher(arg);
-        if (mat.find()) seconds = Integer.parseInt(mat.group().substring(0, mat.group().length() - 1));
+        if (mat.find()) seconds += Integer.parseInt(mat.group().substring(0, mat.group().length() - 1));
 
         long totalHours = (days * 24) + hours;
         long totalMinutes = (totalHours * 60) + minutes;

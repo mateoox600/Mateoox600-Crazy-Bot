@@ -17,8 +17,10 @@ import fr.mateoox600.mcb.events.UserEvents;
 import fr.mateoox600.mcb.reminders.commands.DeleteReminderCommand;
 import fr.mateoox600.mcb.reminders.commands.ReminderCommand;
 import fr.mateoox600.mcb.reminders.commands.RemindersCommand;
+import fr.mateoox600.mcb.ticket.TicketCommand;
+import fr.mateoox600.mcb.ticket.TicketManager;
 import fr.mateoox600.mcb.utils.Config;
-import fr.mateoox600.mcb.utils.crtlpanel.ControlPanel;
+import fr.mateoox600.mcb.utils.controlpanel.ControlPanel;
 import fr.mateoox600.mcb.utils.Logger;
 import fr.mateoox600.mcb.reminders.utils.RemindersManager;
 import net.dv8tion.jda.api.JDA;
@@ -43,10 +45,10 @@ public class MCB {
     public static JDA jda;
     public static Emote MCBEmote;
     public static ControlPanel controlPanel;
+    public static TicketManager ticketManager;
     public static HashMap<String, Message> reactionsEventMessage = new HashMap<>();
     public static String[] reactionNumber = new String[]{"\u0030\u20E3", "\u0031\u20E3", "\u0032\u20E3", "\u0033\u20E3", "\u0034\u20E3", "\u0035\u20E3", "\u0036\u20E3", "\u0037\u20E3", "\u0038\u20E3", "\u0039\u20E3"};
 
-    // TODO: 11/08/2020 JFrame Control panel
     public static void main(String[] args) throws LoginException, InterruptedException, IOException {
 
         config = new Config("config.json");
@@ -55,6 +57,7 @@ public class MCB {
 
         logger = new Logger(System.out, "latest.log");
         logger.attach();
+        System.out.println("[INFO] Control Panel created");
         System.out.println("[INFO] Logging enable");
 
         config.launch();
@@ -87,7 +90,8 @@ public class MCB {
                 new SaveCommand(),
                 new SayCommand(),
                 new QueryCommand(),
-                new EBOwnerCommand());
+                new EBOwnerCommand(),
+                new TicketCommand());
 
         JDABuilder jdaBuilder = JDABuilder.createDefault(config.getToken())
                 .setChunkingFilter(ChunkingFilter.ALL)
@@ -116,12 +120,19 @@ public class MCB {
         remindersManager = new RemindersManager();
         System.out.println("[INFO] ReminderManager loaded");
 
+        ticketManager = new TicketManager();
+        System.out.println("[INFO] TicketManager loaded");
+
+        controlPanel.startThread();
+
         Timer timer = new Timer();
 
         timer.schedule(new ReactionsEventsMessagesClean(), 1000 * 120, 1000 * 120);
 
         jda.getPresence().setActivity(Activity.playing(config.getStatus()));
         System.out.println("[INFO] Setting default status");
+
+        System.out.println("[INFO] Bot Launched");
 
     }
 
